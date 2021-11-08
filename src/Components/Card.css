@@ -1,0 +1,15 @@
+.stockNames {
+  border-bottom: 1px solid black;
+}
+
+.metricLabel {
+  margin-top: 20%;
+}
+td {
+  text-align: center;
+}
+
+.stockCard {
+  display: flex;
+  justify-content: center;
+}

@@ -4,41 +4,64 @@ const LogOnForm = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const [isLogin, setIsLogin] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); //use loading state to conditionally render loading
 
   const changeAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
   };
+
   const onSubmitHandler = (event) => {
     event.preventDefault();
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
-
+    setIsLoading(true);
+    let apiURL;
     if (isLogin) {
+      apiURL =
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAapwykxzCrhSRZM7sRNY4zz47rcBE-aDo";
     } else {
-      fetch(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAapwykxzCrhSRZM7sRNY4zz47rcBE-aDo",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            email: email,
-            password: password,
-            returnSecureToken: true,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      ).then((response) => {
+      apiURL =
+        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAapwykxzCrhSRZM7sRNY4zz47rcBE-aDo";
+    }
+
+    fetch(apiURL, {
+      method: "POST",
+      body: JSON.stringify({
+        email: email,
+        password: password,
+        returnSecureToken: true,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        setIsLoading(false);
         if (response.ok) {
-          console.log("Success");
+          return response.json();
         } else {
-          response.json().then((data) => {
-            console.log(data);
+          return response.json().then((data) => {
+            let errorMessage = "Authentication Error";
+
+            // if (data && data.error && data.error.message) {
+            //   errorMessage = data.error.message;
+            // }
+            throw new Error(errorMessage);
           });
         }
+      })
+      .then((data) => {
+        console.log(data);
+        setIsLogin(true);
+        if (data.idToken) {
+        }
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        alert(error);
       });
-    }
   };
+
   return (
     <form onSubmit={onSubmitHandler}>
       <div>
@@ -47,9 +70,13 @@ const LogOnForm = () => {
         <h3>Password</h3>
         <input type="password" id="password" ref={passwordRef} />
       </div>
-      <button type="submit" id="submit">
-        <h3>Submit</h3>
-      </button>
+      {!isLoading ? (
+        <button type="submit" id="submit">
+          Submit
+        </button>
+      ) : (
+        <p>Loading</p>
+      )}
     </form>
   );
 };

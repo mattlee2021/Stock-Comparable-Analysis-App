@@ -1,9 +1,36 @@
-import logo from "./logo.svg";
 import "./App.css";
-import LogOnForm from "./Components/LogOnForm";
+import LogOnForm from "./components/LogOnForm";
+import StockApi from "./api/StockApi";
+import React, { useState } from "react";
+import Card from "./components/Card";
 
 function App() {
-  return <LogOnForm />;
+  // const [singleStock, setSingleStock] = useState("");
+  // const getStockData = (data) => {
+  //   setSingleStock(data);
+  //   console.log(data, singleStock);
+  // };
+
+  const [stockData, setStockData] = useState([]);
+
+  const getStockData = (newStock) => {
+    for (const index in stockData) {
+      if (newStock.Ticker === stockData[index].Ticker) {
+        alert("That stock is already on your list!");
+        return;
+      }
+    }
+    setStockData((prev) => {
+      console.log("Prev", prev);
+      return [...prev, newStock];
+    });
+  };
+  return (
+    <React.Fragment>
+      <StockApi getStockData={getStockData} />
+      <Card stockData={stockData} />
+    </React.Fragment>
+  );
 }
 
 export default App;
