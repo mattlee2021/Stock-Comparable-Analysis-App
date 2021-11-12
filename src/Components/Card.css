@@ -1,4 +1,4 @@
-.stockNames {
+/* .stockNames {
   border-bottom: 1px solid black;
 }
 
@@ -12,4 +12,39 @@ td {
 .stockCard {
   display: flex;
   justify-content: center;
+} */
+
+table {
+  border-collapse: collapse;
 }
+
+/* tr {
+  display: flex;
+  justify-content: flex-start;
+} */
+
+/* tr {
+  width: 10%;
+} */
+
+.stockNames {
+  border-bottom: 1px solid black;
+  text-align: center;
+  padding-left: 0.5em;
+}
+td {
+  text-align: center;
+  padding-top: 0.5em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
+.metricLabel {
+  text-align: left;
+  padding-top: 0.5em;
+}
+
+/* .sector {
+  padding-right: 1.5em;
+  padding-left: 1.5em;
+} */

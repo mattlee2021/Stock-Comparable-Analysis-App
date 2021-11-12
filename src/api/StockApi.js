@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./StockApi.scss";
 
 const StockApi = (props) => {
   const [ticker, setTicker] = useState("");
@@ -15,14 +16,28 @@ const StockApi = (props) => {
     // Now, need to handle case where there is a bad input
     fetch(stockAPI) // NAME, PERATIO, EPS, SECTOR, PriceToBookRatio, ProfitMargin
       .then((response) => {
-        return response.json();
+        console.log("Got a response,", response);
+        if (response) {
+          console.log("Sending a response");
+          return response.json();
+        } else {
+          console.log("Reached rate limit");
+          throw new Error("Error here!!");
+        }
       })
       .then((data) => {
-        if (Object.keys(data).length === 0) {
+        console.log("New Data,", data);
+        if (data.Name === undefined && data.Note !== undefined) {
+          setTicker("");
+          throw new Error(
+            "You hit the rate limit of 5 stock requests per minute. Please wait another minute before adding new stocks."
+          );
+        } else if (data.Name === undefined) {
+          setTicker("");
           throw new Error("Invalid Ticker");
         }
         stockData = {
-          Ticker: ticker,
+          Ticker: ticker.toUpperCase(),
           Name: data.Name,
           "P/E": data.PERatio,
           EPS: data.EPS,
@@ -34,7 +49,7 @@ const StockApi = (props) => {
         setTicker("");
       })
       .catch((error) => {
-        console.log(error);
+        alert(error);
       });
   };
   return (
@@ -51,6 +66,7 @@ const StockApi = (props) => {
         type="submit"
         disabled={ticker.length === 0}
         onClick={onSubmitTickerHandler}
+        className={ticker.length === 0 ? "disabled" : ""}
       >
         Submit
       </button>

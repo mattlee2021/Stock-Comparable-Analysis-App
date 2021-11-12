@@ -11,9 +11,10 @@ const Card = (props) => {
   return (
     <table>
       <thead>
-        <tr className="stockNames">
+        <tr>
+          <th className="metricLabel stockNames"> Metrics </th>
           {stockData.map((stockData) => {
-            return <th> {stockData["Name"]} </th>;
+            return <th className="stockNames"> {stockData["Name"]} </th>;
           })}
         </tr>
       </thead>
@@ -21,7 +22,7 @@ const Card = (props) => {
         <tr>
           <th className="metricLabel">P/E</th>
           {stockData.map((stockData) => {
-            return <td> {stockData["P/E"]} </td>;
+            return <td>{stockData["P/E"]}</td>;
           })}
         </tr>
         <tr>
@@ -31,21 +32,21 @@ const Card = (props) => {
           })}
         </tr>
         <tr>
-          <th>EPS</th>
+          <th className="metricLabel">EPS</th>
           {stockData.map((stockData) => {
             return <td> {stockData["EPS"]} </td>;
           })}
         </tr>
         <tr>
-          <th>Profit Margin</th>
+          <th className="metricLabel">Profit Margin</th>
           {stockData.map((stockData) => {
             return <td> {stockData["Profit Margin"]} </td>;
           })}
         </tr>
         <tr>
-          <th>Sector</th>
+          <th className="metricLabel">Sector</th>
           {stockData.map((stockData) => {
-            return <td> {stockData["Sector"]} </td>;
+            return <td className="sector"> {stockData["Sector"]} </td>;
           })}
         </tr>
       </tbody>

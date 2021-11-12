@@ -13,7 +13,9 @@ function App() {
 
   const [stockData, setStockData] = useState([]);
 
+  //BUG with two consecutive adds
   const getStockData = (newStock) => {
+    console.log(stockData);
     for (const index in stockData) {
       if (newStock.Ticker === stockData[index].Ticker) {
         alert("That stock is already on your list!");
