@@ -3,6 +3,7 @@ import LogOnForm from "./components/LogOnForm";
 import StockApi from "./api/StockApi";
 import React, { useState } from "react";
 import Card from "./components/Card";
+import SimilarStockApi from "./api/SimilarStockApi";
 
 function App() {
   // const [singleStock, setSingleStock] = useState("");
@@ -18,7 +19,7 @@ function App() {
     console.log(stockData);
     for (const index in stockData) {
       if (newStock.Ticker === stockData[index].Ticker) {
-        alert("That stock is already on your list!");
+        alert(newStock.Ticker + " is already on your list!");
         return;
       }
     }
@@ -29,6 +30,7 @@ function App() {
   };
   return (
     <React.Fragment>
+      {/* <SimilarStockApi /> */}
       <StockApi getStockData={getStockData} />
       <Card stockData={stockData} />
     </React.Fragment>

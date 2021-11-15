@@ -4,17 +4,26 @@ import "./StockApi.scss";
 const StockApi = (props) => {
   const [ticker, setTicker] = useState("");
   let stockData = {};
+  let similarStockData = {};
   //API KEY is TD8ZNN64UTNOK6DA
 
+  /*
+  1. Enter Stock
+  2. Check if stock is valid and get info
+  3. Get similar stocks
+  4. Fetch Stocks for all similar stocks
+  5. bundle data together and send it to Card.js
+  */
   const onSubmitTickerHandler = (event) => {
     event.preventDefault();
-    const stockAPI =
-      "https://www.alphavantage.co/query?function=OVERVIEW&symbol=" +
-      ticker +
-      "&apikey=TD8ZNN64UTNOK6DA";
+
     // Handle empty case by disabling submit if there is no input
     // Now, need to handle case where there is a bad input
-    fetch(stockAPI) // NAME, PERATIO, EPS, SECTOR, PriceToBookRatio, ProfitMargin
+    fetch(
+      "https://www.alphavantage.co/query?function=OVERVIEW&symbol=" +
+        ticker +
+        "&apikey=TD8ZNN64UTNOK6DA"
+    )
       .then((response) => {
         console.log("Got a response,", response);
         if (response) {
@@ -47,11 +56,78 @@ const StockApi = (props) => {
         };
         props.getStockData(stockData);
         setTicker("");
+        return stockData; //
       })
       .catch((error) => {
         alert(error);
       });
+
+    const similarStocks = fetch(
+      "https://stock-data-yahoo-finance-alternative.p.rapidapi.com/v6/finance/recommendationsbysymbol/" +
+        ticker,
+      {
+        method: "GET",
+        headers: {
+          "x-rapidapi-host":
+            "stock-data-yahoo-finance-alternative.p.rapidapi.com",
+          "x-rapidapi-key":
+            "80ad986cb5mshcabba16d2878f8fp14dca4jsn61fd4cc10485",
+        },
+      }
+    ) // ALERT POPS UP WHEN REFRESHING THE PAGE
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error(
+            "No similar companies can be obtained for this stock."
+          );
+        }
+      })
+      .then((data) => {
+        console.log(data.finance.result[0].recommendedSymbols);
+        return data.finance.result[0].recommendedSymbols;
+      })
+      .catch((error) => {
+        alert(error);
+      });
+
+    console.log("similar stocks,", similarStocks);
+    console.log("first", similarStocks[0]);
+    console.log(similarStocks.length);
+
+    async function similarStocksFetched() {
+      const data = await similarStocks;
+      for (let i = 0; i < data.length; i++) {
+        console.log("Elements,", data[i]);
+        fetch(
+          "https://www.alphavantage.co/query?function=OVERVIEW&symbol=" +
+            data[i].symbol +
+            "&apikey=TD8ZNN64UTNOK6DA"
+        )
+          .then((response) => {
+            return response.json();
+          })
+          .then((similarStock) => {
+            console.log("Fetched Data from AlphaVantage,", similarStock);
+            similarStockData = {
+              Ticker: similarStock.Symbol,
+              Name: similarStock.Name,
+              "P/E": similarStock.PERatio,
+              EPS: similarStock.EPS,
+              "P/B": similarStock.PriceToBookRatio,
+              "Profit Margin": similarStock.ProfitMargin,
+              Sector: similarStock.Sector,
+            };
+            console.log(similarStockData);
+            props.getStockData(similarStockData);
+          });
+      }
+    }
+
+    similarStocksFetched();
   };
+
   return (
     <form>
       <label> Ticker</label>
