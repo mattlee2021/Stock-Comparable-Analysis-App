@@ -2,11 +2,11 @@ import { useState } from "react";
 import "./StockSearch.scss";
 const StockSearch = (props) => {
   const [ticker, setTicker] = useState("");
+  const [showSimilarStocks, setShowSimilarStocks] = useState(false);
 
   const onSubmitTickerHandler = (event) => {
     event.preventDefault();
     props.getTicker(ticker);
-    setTicker("");
   };
   return (
     <form>
@@ -26,6 +26,16 @@ const StockSearch = (props) => {
       >
         Submit
       </button>
+      <label> Show Similar Stocks </label>
+      <input
+        type="checkbox"
+        checked={showSimilarStocks}
+        onChange={() => {
+          setShowSimilarStocks((prev) => {
+            return !prev;
+          });
+        }}
+      />
     </form>
   );
 };

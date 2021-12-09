@@ -3,7 +3,6 @@ import "./Card.css";
 
 const Card = (props) => {
   const stockData = props.stockData;
-  console.log(typeof stockData);
   useEffect(() => {
     console.log("Use Effect,", stockData);
   }, [stockData]);
