@@ -1,5 +1,4 @@
-const useStockApi = (ticker, applyData) => {
-  console.log("Request Sent");
+const FetchStocks = (ticker, applyData) => {
   fetch(
     "https://www.alphavantage.co/query?function=OVERVIEW&symbol=" +
       ticker +
@@ -43,8 +42,8 @@ const useStockApi = (ticker, applyData) => {
     });
 
   return {
-    useStockApi,
+    FetchStocks,
   };
 };
 
-export default useStockApi;
+export default FetchStocks;

@@ -1,13 +1,28 @@
 import { useState } from "react";
 import "./StockSearch.scss";
-const StockSearch = (props) => {
-  const [ticker, setTicker] = useState("");
+import FetchStocks from "./FetchStocks";
+import FetchSimilarStocks from "./FetchSimilarStocks";
+
+const StockApi = (props) => {
   const [showSimilarStocks, setShowSimilarStocks] = useState(false);
+  const [ticker, setTicker] = useState("");
+
+  console.log("Ticker StockApi", ticker);
+
+  //API KEY is TD8ZNN64UTNOK6DA
+
+  // Handle empty case by disabling submit if there is no input
+  // Now, need to handle case where there is a bad input
 
   const onSubmitTickerHandler = (event) => {
     event.preventDefault();
-    props.getTicker(ticker);
+    FetchStocks(ticker, props.getStockData);
+    if (showSimilarStocks) {
+      FetchSimilarStocks(ticker, props.getStockData);
+    }
+    setTicker("");
   };
+
   return (
     <form>
       <label> Ticker</label>
@@ -40,4 +55,4 @@ const StockSearch = (props) => {
   );
 };
 
-export default StockSearch;
+export default StockApi;
