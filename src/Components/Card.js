@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "./Card.css";
+import "./Card.scss";
 
 const Card = (props) => {
   const stockData = props.stockData;

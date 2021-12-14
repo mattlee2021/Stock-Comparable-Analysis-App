@@ -25,32 +25,37 @@ const StockApi = (props) => {
 
   return (
     <form>
-      <label> Ticker</label>
-      <input
-        type="text"
-        value={ticker}
-        onChange={(event) => {
-          setTicker(event.target.value);
-        }}
-      />
-      <button
-        type="submit"
-        disabled={ticker.length === 0}
-        onClick={onSubmitTickerHandler}
-        className={ticker.length === 0 ? "disabled" : ""}
-      >
-        Submit
-      </button>
-      <label> Show Similar Stocks </label>
-      <input
-        type="checkbox"
-        checked={showSimilarStocks}
-        onChange={() => {
-          setShowSimilarStocks((prev) => {
-            return !prev;
-          });
-        }}
-      />
+      <div className="ticker">
+        <label> Ticker</label>
+        <input
+          id="tickerInput"
+          type="text"
+          value={ticker}
+          onChange={(event) => {
+            setTicker(event.target.value);
+          }}
+        />
+        <button
+          type="submit"
+          disabled={ticker.length === 0}
+          onClick={onSubmitTickerHandler}
+          className={ticker.length === 0 ? "disabled" : ""}
+        >
+          Submit
+        </button>
+      </div>
+      <div className="similarStock">
+        <label> Show Similar Stocks </label>
+        <input
+          type="checkbox"
+          checked={showSimilarStocks}
+          onChange={() => {
+            setShowSimilarStocks((prev) => {
+              return !prev;
+            });
+          }}
+        />
+      </div>
     </form>
   );
 };
