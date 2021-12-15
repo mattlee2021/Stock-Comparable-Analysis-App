@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import "./Card.scss";
+import DeleteButton from "./DeleteButton";
 
 const Card = (props) => {
   const stockData = props.stockData;
@@ -10,6 +11,20 @@ const Card = (props) => {
   return (
     <table>
       <thead>
+        <tr>
+          {stockData.map((ticker, index) => {
+            // delete via index value
+            return (
+              <th key={index}>
+                <DeleteButton
+                  index={index}
+                  stockData={stockData}
+                  onStockChange={props.onStockChange}
+                />
+              </th>
+            );
+          })}
+        </tr>
         <tr>
           <th className="metricLabel stockNames"> Metrics </th>
           {stockData.map((stockData) => {

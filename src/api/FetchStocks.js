@@ -26,7 +26,7 @@ const FetchStocks = (ticker, applyData) => {
 
       applyData(
         {
-          Ticker: data.Symbol, //Change to Ticker Context
+          Ticker: data.Symbol,
           Name: data.Name,
           "P/E": data.PERatio,
           EPS: data.EPS,

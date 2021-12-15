@@ -24,7 +24,7 @@ function App() {
   return (
     <React.Fragment>
       <StockApi getStockData={getStockData} />
-      <Card stockData={stockData} />
+      <Card stockData={stockData} onStockChange={setStockData} />
     </React.Fragment>
   );
 }
