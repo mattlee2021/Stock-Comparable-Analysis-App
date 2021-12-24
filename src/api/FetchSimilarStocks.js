@@ -30,14 +30,12 @@ const FetchSimilarStocks = (ticker, applyData) => {
        for a total of 5 stock requests for FetchStocks. There is a max of 5 stock requests/minute. 
        */
       for (let i = 0; i < similarStocks.length - 1; i++) {
-        FetchStocks(similarStocks[i].symbol, applyData);
+        FetchStocks(similarStocks[i].symbol, applyData, true);
       }
     })
     .catch((error) => {
       alert(error);
     });
-
-  return { FetchSimilarStocks };
 };
 
 export default FetchSimilarStocks;

@@ -12,20 +12,6 @@ const Card = (props) => {
     <table>
       <thead>
         <tr>
-          {stockData.map((ticker, index) => {
-            // delete via index value
-            return (
-              <th key={index}>
-                <DeleteButton
-                  index={index}
-                  stockData={stockData}
-                  onStockChange={props.onStockChange}
-                />
-              </th>
-            );
-          })}
-        </tr>
-        <tr>
           <th className="metricLabel stockNames"> Metrics </th>
           {stockData.map((stockData) => {
             return <th className="stockNames"> {stockData["Name"]} </th>;
@@ -60,7 +46,22 @@ const Card = (props) => {
         <tr>
           <th className="metricLabel">Sector</th>
           {stockData.map((stockData) => {
-            return <td className="sector"> {stockData["Sector"]} </td>;
+            return <td> {stockData["Sector"]} </td>;
+          })}
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          {stockData.map((ticker, index) => {
+            // delete via index value
+            return (
+              <td>
+                <DeleteButton
+                  index={index}
+                  stockData={stockData}
+                  onStockChange={props.onStockChange}
+                />
+              </td>
+            );
           })}
         </tr>
       </tbody>

@@ -1,3 +1,4 @@
+import "./DeleteButton.scss";
 const DeleteButton = (props) => {
   const handleDeleteStock = (event) => {
     event.preventDefault();
@@ -8,7 +9,11 @@ const DeleteButton = (props) => {
     );
   };
 
-  return <button onClick={handleDeleteStock}>Delete</button>;
+  return (
+    <button onClick={handleDeleteStock} className="deleteButton">
+      Delete
+    </button>
+  );
 };
 
 export default DeleteButton;

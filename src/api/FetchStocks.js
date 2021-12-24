@@ -1,4 +1,4 @@
-const FetchStocks = (ticker, applyData) => {
+const FetchStocks = (ticker, applyData, similarStockRequest) => {
   fetch(
     "https://www.alphavantage.co/query?function=OVERVIEW&symbol=" +
       ticker +
@@ -16,10 +16,16 @@ const FetchStocks = (ticker, applyData) => {
     })
     .then((data) => {
       console.log("New Data,", data);
-      if (data.Name === undefined && data.Note !== undefined) {
+      if (
+        data.Name === undefined &&
+        data.Note !== undefined &&
+        !similarStockRequest
+      ) {
         throw new Error(
           "You hit the rate limit of 5 stock requests per minute. Please wait another minute before adding new stocks."
         );
+      } else if (data.Name === undefined && similarStockRequest) {
+        return;
       } else if (data.Name === undefined) {
         throw new Error("Invalid Ticker");
       }
@@ -34,16 +40,12 @@ const FetchStocks = (ticker, applyData) => {
           "Profit Margin": data.ProfitMargin,
           Sector: data.Sector,
         },
-        false
+        similarStockRequest
       );
     })
     .catch((error) => {
       alert(error);
     });
-
-  return {
-    FetchStocks,
-  };
 };
 
 export default FetchStocks;
