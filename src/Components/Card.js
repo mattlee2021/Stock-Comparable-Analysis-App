@@ -32,6 +32,18 @@ const Card = (props) => {
           })}
         </tr>
         <tr>
+          <th className="metricLabel">EV/EBITDA</th>
+          {stockData.map((stockData) => {
+            return <td> {stockData["EV/EBITDA"]} </td>;
+          })}
+        </tr>
+        <tr>
+          <th className="metricLabel">EV/Revenue</th>
+          {stockData.map((stockData) => {
+            return <td> {stockData["EV/Revenue"]} </td>;
+          })}
+        </tr>
+        <tr>
           <th className="metricLabel">EPS</th>
           {stockData.map((stockData) => {
             return <td> {stockData["EPS"]} </td>;
@@ -52,7 +64,6 @@ const Card = (props) => {
         <tr>
           <td>&nbsp;</td>
           {stockData.map((ticker, index) => {
-            // delete via index value
             return (
               <td>
                 <DeleteButton

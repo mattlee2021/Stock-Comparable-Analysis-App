@@ -26,7 +26,7 @@ const StockApi = (props) => {
   return (
     <form>
       <div className="ticker">
-        <label> Ticker</label>
+        <label>Ticker</label>
         <input
           id="tickerInput"
           type="text"
