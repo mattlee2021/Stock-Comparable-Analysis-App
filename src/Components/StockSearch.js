@@ -1,7 +1,8 @@
 import { useState } from "react";
 import "./StockSearch.scss";
-import FetchStocks from "./FetchStocks";
-import FetchSimilarStocks from "./FetchSimilarStocks";
+import FetchStocks from "../api/FetchStocks";
+import FetchSimilarStocks from "../api/FetchSimilarStocks";
+import SearchBar from "./SearchBar";
 
 const StockApi = (props) => {
   const [showSimilarStocks, setShowSimilarStocks] = useState(false);
@@ -26,8 +27,8 @@ const StockApi = (props) => {
   return (
     <form>
       <div className="ticker">
-        <label>Ticker</label>
-        <input
+        <label>Company</label>
+        {/* <input
           id="tickerInput"
           type="text"
           value={ticker}
@@ -42,7 +43,8 @@ const StockApi = (props) => {
           className={ticker.length === 0 ? "disabled" : ""}
         >
           Submit
-        </button>
+        </button> */}
+        <SearchBar />
       </div>
       <div className="similarStock">
         <label> Show Similar Stocks </label>
