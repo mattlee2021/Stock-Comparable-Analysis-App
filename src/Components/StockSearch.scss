@@ -17,6 +17,9 @@ form {
   margin: auto;
   border: 3px solid black;
   color: black;
+  position: absolute;
+  top: 19px;
+  left: 60%;
   background-color: white;
   &.disabled {
     border: 3px solid #999999;
@@ -32,7 +35,7 @@ form {
 
 .similarStock {
   position: absolute;
-  left: 63%;
+  left: 65%;
   top: 22px;
 }
 

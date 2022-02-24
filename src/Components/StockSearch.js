@@ -36,6 +36,8 @@ const StockSearch = (props) => {
             setTicker(event.target.value);
           }}
         />
+         */}
+        <SearchBar />
         <button
           type="submit"
           disabled={ticker.length === 0}
@@ -43,8 +45,7 @@ const StockSearch = (props) => {
           className={ticker.length === 0 ? "disabled" : ""}
         >
           Submit
-        </button> */}
-        <SearchBar />
+        </button>
       </div>
       <div className="similarStock">
         <label> Show Similar Stocks </label>

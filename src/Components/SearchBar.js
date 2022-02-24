@@ -82,9 +82,9 @@ const SearchBar = (props) => {
         onChange={onChangeTicker}
         className="searchBar"
       />
-      <button type="submit" onClick={onSubmitHandler}>
+      {/* <button type="submit" onClick={onSubmitHandler}>
         Search
-      </button>
+      </button> */}
       <div className="searchResults">
         {suggestedResults.map((stock) => {
           return (
