@@ -2,8 +2,9 @@ const FetchStocks = (ticker, applyData, similarStockRequest) => {
   fetch(
     "https://www.alphavantage.co/query?function=OVERVIEW&symbol=" +
       ticker +
-      "&apikey=TD8ZNN64UTNOK6DA"
-  )
+      "&apikey=ZY9GZNYZQM8C1MQC"
+  ) //Amherst Key ZY9 GZN YZQ M8C 1MQC
+    //TD8ZNN64UTNOK6DA
     .then((response) => {
       console.log("Got a response,", response);
       if (response) {

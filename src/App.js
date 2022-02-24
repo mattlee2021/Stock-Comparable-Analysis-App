@@ -1,6 +1,6 @@
-import StockApi from "./components/StockSearch";
 import React, { useState } from "react";
 import Card from "./components/Card";
+import StockSearch from "./components/StockSearch";
 
 function App() {
   const [stockData, setStockData] = useState([]);
@@ -21,7 +21,7 @@ function App() {
 
   return (
     <React.Fragment>
-      <StockApi getStockData={getStockData} />
+      <StockSearch getStockData={getStockData} />
       <Card stockData={stockData} onStockChange={setStockData} />
     </React.Fragment>
   );

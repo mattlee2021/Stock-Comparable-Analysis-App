@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./SearchBar.scss";
 
 const SearchBar = (props) => {
   /*
@@ -21,79 +22,8 @@ const SearchBar = (props) => {
 
     */
 
-  //Fake items for BA
-  const items = {
-    bestMatches: [
-      {
-        symbol: "BA",
-        name: "Boeing Company",
-        type: "Equity",
-        region: "United States",
-        marketOpen: "09:30",
-        marketClose: "16:00",
-        timezone: "UTC-04",
-        currency: "USD",
-        matchScore: "1.0000",
-      },
-      {
-        symbol: "BAB",
-        name: "INVESCO TAXABLE MUNICIPAL BOND ETF ",
-        type: "ETF",
-        region: "United States",
-        marketOpen: "09:30",
-        marketClose: "16:00",
-        timezone: "UTC-04",
-        currency: "USD",
-        matchScore: "0.8000",
-      },
-      {
-        symbol: "BA.LON",
-        name: "BAE Systems plc",
-        type: "Equity",
-        region: "United Kingdom",
-        marketOpen: "08:00",
-        marketClose: "16:30",
-        timezone: "UTC+00",
-        currency: "GBX",
-        matchScore: "0.6667",
-      },
-      {
-        symbol: "BABA",
-        name: "Alibaba Group Holding Ltd",
-        type: "Equity",
-        region: "United States",
-        marketOpen: "09:30",
-        marketClose: "16:00",
-        timezone: "UTC-04",
-        currency: "USD",
-        matchScore: "0.6667",
-      },
-      {
-        symbol: "BA3.FRK",
-        name: "Brooks Automation Inc",
-        type: "Equity",
-        region: "Frankfurt",
-        marketOpen: "08:00",
-        marketClose: "20:00",
-        timezone: "UTC+01",
-        currency: "EUR",
-        matchScore: "0.5714",
-      },
-      {
-        symbol: "BAAPX",
-        name: "BlackRock Aggressive GwthPrprdPtfInvstrA",
-        type: "Mutual Fund",
-        region: "United States",
-        marketOpen: "09:30",
-        marketClose: "16:00",
-        timezone: "UTC-04",
-        currency: "USD",
-        matchScore: "0.5714",
-      },
-    ],
-  };
   const [suggestedResults, setSuggestedResults] = useState([]);
-  const [ticker, setTicker] = useState([]);
+  const [ticker, setTicker] = useState("");
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
@@ -101,18 +31,41 @@ const SearchBar = (props) => {
 
   const onChangeTicker = (event) => {
     setTicker(() => event.target.value);
-    // Do filtering logic here; regex
-    //RegExp(`^${ticker}`, i)
   };
 
   useEffect(() => {
-    /**
-     * Call API here
-     * When a user types, it will call the api
-     * take the top 5 results and put them in the suggestedResults array
-     * Is the API case sensitive?
-     */
+    setSuggestedResults(() => []);
+    fetch(
+      `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${ticker}&apikey=ZY9GZNYZQM8C1MQC`
+    )
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+      })
+      .then((data) => {
+        if (data.bestMatches) {
+          console.log("Data", data);
+          for (let index = 0; index < 5; index++) {
+            let key = index.toString();
+
+            setSuggestedResults((prev) => [
+              ...prev,
+              [
+                data.bestMatches[key]["1. symbol"],
+                data.bestMatches[key]["2. name"],
+              ],
+            ]);
+          }
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+    //console.log(suggestedResults);
   }, [ticker]);
+
+  console.log(suggestedResults);
 
   return (
     <React.Fragment>
@@ -121,7 +74,17 @@ const SearchBar = (props) => {
         type="text"
         value={ticker}
         onChange={onChangeTicker}
+        className="searchBar"
       />
+      <div className="searchResults">
+        {suggestedResults.map((stock) => {
+          return (
+            <ul>
+              Symbol: {stock[0]}, Name: {stock[1]}
+            </ul>
+          );
+        })}
+      </div>
       <button type="submit" onClick={onSubmitHandler}>
         Search
       </button>

@@ -4,7 +4,7 @@ import FetchStocks from "../api/FetchStocks";
 import FetchSimilarStocks from "../api/FetchSimilarStocks";
 import SearchBar from "./SearchBar";
 
-const StockApi = (props) => {
+const StockSearch = (props) => {
   const [showSimilarStocks, setShowSimilarStocks] = useState(false);
   const [ticker, setTicker] = useState("");
 
@@ -27,8 +27,8 @@ const StockApi = (props) => {
   return (
     <form>
       <div className="ticker">
-        <label>Company</label>
-        {/* <input
+        <label>Ticker</label>
+        <input
           id="tickerInput"
           type="text"
           value={ticker}
@@ -43,8 +43,8 @@ const StockApi = (props) => {
           className={ticker.length === 0 ? "disabled" : ""}
         >
           Submit
-        </button> */}
-        <SearchBar />
+        </button>
+        {/* <SearchBar /> */}
       </div>
       <div className="similarStock">
         <label> Show Similar Stocks </label>
@@ -62,4 +62,4 @@ const StockApi = (props) => {
   );
 };
 
-export default StockApi;
+export default StockSearch;
