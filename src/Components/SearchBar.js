@@ -48,14 +48,20 @@ const SearchBar = (props) => {
           console.log("Data", data);
           for (let index = 0; index < 5; index++) {
             let key = index.toString();
-
-            setSuggestedResults((prev) => [
-              ...prev,
-              [
-                data.bestMatches[key]["1. symbol"],
-                data.bestMatches[key]["2. name"],
-              ],
-            ]);
+            // console.log("symbol", data.bestMatches[key]["1. symbol"]);
+            // console.log("name", data.bestMatches[key]["2. name"]);
+            if (
+              data.bestMatches[key]["1. symbol"] &&
+              data.bestMatches[key]["2. name"]
+            ) {
+              setSuggestedResults((prev) => [
+                ...prev,
+                [
+                  data.bestMatches[key]["1. symbol"],
+                  data.bestMatches[key]["2. name"],
+                ],
+              ]);
+            }
           }
         }
       })
@@ -76,18 +82,18 @@ const SearchBar = (props) => {
         onChange={onChangeTicker}
         className="searchBar"
       />
+      <button type="submit" onClick={onSubmitHandler}>
+        Search
+      </button>
       <div className="searchResults">
         {suggestedResults.map((stock) => {
           return (
             <ul>
-              Symbol: {stock[0]}, Name: {stock[1]}
+              Symbol: {stock[0]} Name: {stock[1]}
             </ul>
           );
         })}
       </div>
-      <button type="submit" onClick={onSubmitHandler}>
-        Search
-      </button>
     </React.Fragment>
   );
 };

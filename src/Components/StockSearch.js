@@ -28,7 +28,7 @@ const StockSearch = (props) => {
     <form>
       <div className="ticker">
         <label>Ticker</label>
-        <input
+        {/* <input
           id="tickerInput"
           type="text"
           value={ticker}
@@ -43,8 +43,8 @@ const StockSearch = (props) => {
           className={ticker.length === 0 ? "disabled" : ""}
         >
           Submit
-        </button>
-        {/* <SearchBar /> */}
+        </button> */}
+        <SearchBar />
       </div>
       <div className="similarStock">
         <label> Show Similar Stocks </label>

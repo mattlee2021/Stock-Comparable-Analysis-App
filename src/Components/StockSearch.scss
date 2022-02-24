@@ -1,33 +1,18 @@
-// form {
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-content: flex-start;
-//   width: 10%;
-//   text-align: center;
-//   margin: 1em auto 1em auto;
-// }
-
-// label {
-//   font-size: 20px;
-//   font-family: Arial, Helvetica, sans-serif;
-// }
-
 form {
   position: relative;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 .ticker {
-  position: absolute;
-  left: 40%;
+  position: relative;
+  //left: 40%;
   padding-top: 10px;
-  display: flex;
-  gap: 2%;
+  // display: flex;
+  // gap: 2%;
+  text-align: center;
 }
 
 .ticker button {
-  width: 25%;
   border-radius: 8px;
   margin: auto;
   border: 3px solid black;
@@ -47,8 +32,8 @@ form {
 
 .similarStock {
   position: absolute;
-  left: 44%;
-  top: 40px;
+  left: 63%;
+  top: 22px;
 }
 
 .similarStock label {
