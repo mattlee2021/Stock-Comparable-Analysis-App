@@ -19,7 +19,6 @@ form {
   color: black;
   position: absolute;
   top: 19px;
-  left: 60%;
   background-color: white;
   &.disabled {
     border: 3px solid #999999;
@@ -49,9 +48,10 @@ form {
 
 .searchResults {
   font-size: 14px;
+  width: 17%;
+  margin: auto;
   position: relative;
-  text-align: center;
-  right: 20px;
+  //right: 20px;
   cursor: pointer;
 }
 

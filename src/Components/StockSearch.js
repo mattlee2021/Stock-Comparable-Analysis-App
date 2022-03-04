@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./StockSearch.scss";
 import FetchStocks from "../api/FetchStocks";
 import FetchSimilarStocks from "../api/FetchSimilarStocks";
@@ -8,8 +8,6 @@ const StockSearch = (props) => {
   const [showSimilarStocks, setShowSimilarStocks] = useState(false);
   const [suggestedResults, setSuggestedResults] = useState([]);
   const [ticker, setTicker] = useState("");
-
-  console.log("Ticker StockApi", ticker);
 
   //API KEY is TD8ZNN64UTNOK6DA
 
@@ -22,11 +20,11 @@ const StockSearch = (props) => {
     setTicker("");
   };
 
-  useEffect(() => {
-    console.log("Run similar stocks");
+  const onChangeInput = (event) => {
+    setTicker(() => event.target.value);
     setSuggestedResults(() => []);
     fetch(
-      `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${ticker}&apikey=ZY9GZNYZQM8C1MQC`
+      `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${event.target.value}&apikey=ZY9GZNYZQM8C1MQC`
     )
       .then((response) => {
         if (response.ok) {
@@ -58,7 +56,7 @@ const StockSearch = (props) => {
       .catch((e) => {
         console.log(e);
       });
-  }, [ticker]);
+  };
 
   return (
     <form>
@@ -68,9 +66,7 @@ const StockSearch = (props) => {
           id="tickerInput"
           type="text"
           value={ticker}
-          onChange={(event) => {
-            setTicker(event.target.value);
-          }}
+          onChange={onChangeInput}
           className="searchBar"
         />
         <button
@@ -81,6 +77,18 @@ const StockSearch = (props) => {
         >
           Submit
         </button>
+        <div className="similarStock">
+          <label> Show Similar Stocks </label>
+          <input
+            type="checkbox"
+            checked={showSimilarStocks}
+            onChange={() => {
+              setShowSimilarStocks((prev) => {
+                return !prev;
+              });
+            }}
+          />
+        </div>
       </div>
       <div className="searchResults">
         {suggestedResults.map((stock) => {
@@ -89,7 +97,6 @@ const StockSearch = (props) => {
               onClick={() => {
                 setTicker(() => stock[0]);
                 setSuggestedResults(() => []);
-                // Re-renders because setTicker sets a new ticker value, which causes the useEffect to re-run.
               }}
             >
               Symbol: {stock[0]} Name: {stock[1]}
@@ -97,7 +104,7 @@ const StockSearch = (props) => {
           );
         })}
       </div>
-      <div className="similarStock">
+      {/* <div className="similarStock">
         <label> Show Similar Stocks </label>
         <input
           type="checkbox"
@@ -108,7 +115,7 @@ const StockSearch = (props) => {
             });
           }}
         />
-      </div>
+      </div> */}
     </form>
   );
 };
