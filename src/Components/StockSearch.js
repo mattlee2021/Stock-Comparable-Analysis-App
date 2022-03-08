@@ -2,7 +2,6 @@ import { useState } from "react";
 import "./StockSearch.scss";
 import FetchStocks from "../api/FetchStocks";
 import FetchSimilarStocks from "../api/FetchSimilarStocks";
-import SearchBar from "./SearchBar";
 
 const StockSearch = (props) => {
   const [showSimilarStocks, setShowSimilarStocks] = useState(false);
@@ -18,6 +17,7 @@ const StockSearch = (props) => {
       FetchSimilarStocks(ticker, props.getStockData);
     }
     setTicker("");
+    setSuggestedResults(() => []);
   };
 
   const onChangeInput = (event) => {
@@ -63,7 +63,6 @@ const StockSearch = (props) => {
       <div className="ticker">
         <label>Ticker</label>
         <input
-          id="tickerInput"
           type="text"
           value={ticker}
           onChange={onChangeInput}

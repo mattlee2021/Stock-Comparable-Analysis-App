@@ -5,11 +5,10 @@ form {
 
 .ticker {
   position: relative;
-  //left: 40%;
   padding-top: 10px;
-  // display: flex;
-  // gap: 2%;
-  text-align: center;
+  display: inline-block;
+  width: 100%;
+  margin: 0 45rem;
 }
 
 .ticker button {
@@ -18,7 +17,6 @@ form {
   border: 3px solid black;
   color: black;
   position: absolute;
-  top: 19px;
   background-color: white;
   &.disabled {
     border: 3px solid #999999;
@@ -33,9 +31,8 @@ form {
 }
 
 .similarStock {
-  position: absolute;
-  left: 65%;
-  top: 22px;
+  display: inline-block;
+  margin-left: 5rem;
 }
 
 .similarStock label {
@@ -58,6 +55,6 @@ form {
 .searchBar {
   border-radius: 4px;
   font-size: 15px;
-  width: 15%;
-  margin: 10px 15px;
+  margin: 0 1rem;
+  width: 15rem;
 }
