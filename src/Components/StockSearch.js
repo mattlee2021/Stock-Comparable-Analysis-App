@@ -32,22 +32,42 @@ const StockSearch = (props) => {
         }
       })
       .then((data) => {
+        // NEEDS A REFACTOR
         if (data.bestMatches) {
-          for (let index = 0; index < 5; index++) {
-            let key = index.toString();
-            if (
-              data.bestMatches[key]["1. symbol"] &&
-              data.bestMatches[key]["2. name"]
-            ) {
-              setSuggestedResults((prev) => [
-                ...prev,
-                [
-                  data.bestMatches[key]["1. symbol"],
-                  data.bestMatches[key]["2. name"],
-                ],
-              ]);
+          if (data.bestMatches.length > 5) {
+            for (let index = 0; index < 5; index++) {
+              let key = index;
+              if (
+                data.bestMatches[key]["1. symbol"] &&
+                data.bestMatches[key]["2. name"]
+              ) {
+                setSuggestedResults((prev) => [
+                  ...prev,
+                  [
+                    data.bestMatches[key]["1. symbol"],
+                    data.bestMatches[key]["2. name"],
+                  ],
+                ]);
+              }
+            }
+          } else {
+            for (let index = 0; index < data.bestMatches.length; index++) {
+              let key = index;
+              if (
+                data.bestMatches[key]["1. symbol"] &&
+                data.bestMatches[key]["2. name"]
+              ) {
+                setSuggestedResults((prev) => [
+                  ...prev,
+                  [
+                    data.bestMatches[key]["1. symbol"],
+                    data.bestMatches[key]["2. name"],
+                  ],
+                ]);
+              }
             }
           }
+          console.log("suggested results", suggestedResults);
         }
       })
       .catch((e) => {
