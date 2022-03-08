@@ -33,11 +33,8 @@ const StockSearch = (props) => {
       })
       .then((data) => {
         if (data.bestMatches) {
-          console.log("Data", data);
           for (let index = 0; index < 5; index++) {
             let key = index.toString();
-            // console.log("symbol", data.bestMatches[key]["1. symbol"]);
-            // console.log("name", data.bestMatches[key]["2. name"]);
             if (
               data.bestMatches[key]["1. symbol"] &&
               data.bestMatches[key]["2. name"]

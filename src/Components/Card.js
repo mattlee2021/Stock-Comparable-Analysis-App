@@ -1,12 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./Card.scss";
 import DeleteButton from "./DeleteButton";
 
 const Card = (props) => {
   const stockData = props.stockData;
-  useEffect(() => {
-    console.log("Use Effect,", stockData);
-  }, [stockData]);
 
   return (
     <table>

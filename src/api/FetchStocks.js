@@ -6,7 +6,6 @@ const FetchStocks = (ticker, applyData, similarStockRequest) => {
   ) //Amherst Key ZY9 GZN YZQ M8C 1MQC
     //TD8ZNN64UTNOK6DA
     .then((response) => {
-      console.log("Got a response,", response);
       if (response) {
         console.log("Sending a response");
         return response.json();
@@ -16,7 +15,6 @@ const FetchStocks = (ticker, applyData, similarStockRequest) => {
       }
     })
     .then((data) => {
-      console.log("New Data,", data);
       if (
         data.Name === undefined &&
         data.Note !== undefined &&

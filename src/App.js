@@ -14,7 +14,6 @@ function App() {
       }
     }
     setStockData((prev) => {
-      console.log("Prev", prev);
       return [...prev, newStock];
     });
   };
