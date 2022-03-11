@@ -33,12 +33,8 @@ const StockSearch = (props) => {
         }
       })
       .then((data) => {
-        console.log("best matches", data.bestMatches);
-        if (data.bestMatches.length >= 4) {
-          suggestedResultsSize = 4;
-        } else {
-          suggestedResultsSize = data.bestMatches.length;
-        }
+        suggestedResultsSize =
+          data.bestMatches.length >= 4 ? 4 : data.bestMatches.length;
 
         for (let index = 0; index < suggestedResultsSize; index++) {
           let key = index;
@@ -55,8 +51,6 @@ const StockSearch = (props) => {
             ]);
           }
         }
-
-        console.log("suggested results", suggestedResults);
       })
       .catch((e) => {
         console.log(e);

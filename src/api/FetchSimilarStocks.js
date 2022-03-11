@@ -21,7 +21,6 @@ const FetchSimilarStocks = (ticker, applyData) => {
       }
     })
     .then((data) => {
-      console.log("Retrieved Data", data.finance.result[0].recommendedSymbols);
       const similarStocks = data.finance.result[0].recommendedSymbols;
       /*
        data.finance.result[0].recommendedSymbols returns an array of 5 similar stocks in order from most similar (index 0) to less similar (index 4),
