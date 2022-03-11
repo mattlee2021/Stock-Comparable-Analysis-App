@@ -7,6 +7,7 @@ const StockSearch = (props) => {
   const [showSimilarStocks, setShowSimilarStocks] = useState(false);
   const [suggestedResults, setSuggestedResults] = useState([]);
   const [ticker, setTicker] = useState("");
+  let suggestedResultsSize;
 
   //API KEY is TD8ZNN64UTNOK6DA
 
@@ -32,44 +33,30 @@ const StockSearch = (props) => {
         }
       })
       .then((data) => {
-        // NEEDS A REFACTOR
         console.log("best matches", data.bestMatches);
-        if (data.bestMatches) {
-          if (data.bestMatches.length > 5) {
-            for (let index = 0; index < 5; index++) {
-              let key = index;
-              if (
-                data.bestMatches[key]["1. symbol"] &&
-                data.bestMatches[key]["2. name"]
-              ) {
-                setSuggestedResults((prev) => [
-                  ...prev,
-                  [
-                    data.bestMatches[key]["1. symbol"],
-                    data.bestMatches[key]["2. name"],
-                  ],
-                ]);
-              }
-            }
-          } else {
-            for (let index = 0; index < data.bestMatches.length; index++) {
-              let key = index;
-              if (
-                data.bestMatches[key]["1. symbol"] &&
-                data.bestMatches[key]["2. name"]
-              ) {
-                setSuggestedResults((prev) => [
-                  ...prev,
-                  [
-                    data.bestMatches[key]["1. symbol"],
-                    data.bestMatches[key]["2. name"],
-                  ],
-                ]);
-              }
-            }
-          }
-          console.log("suggested results", suggestedResults);
+        if (data.bestMatches.length >= 4) {
+          suggestedResultsSize = 4;
+        } else {
+          suggestedResultsSize = data.bestMatches.length;
         }
+
+        for (let index = 0; index < suggestedResultsSize; index++) {
+          let key = index;
+          if (
+            data.bestMatches[key]["1. symbol"] &&
+            data.bestMatches[key]["2. name"]
+          ) {
+            setSuggestedResults((prev) => [
+              ...prev,
+              [
+                data.bestMatches[key]["1. symbol"],
+                data.bestMatches[key]["2. name"],
+              ],
+            ]);
+          }
+        }
+
+        console.log("suggested results", suggestedResults);
       })
       .catch((e) => {
         console.log(e);
@@ -121,18 +108,6 @@ const StockSearch = (props) => {
           );
         })}
       </div>
-      {/* <div className="similarStock">
-        <label> Show Similar Stocks </label>
-        <input
-          type="checkbox"
-          checked={showSimilarStocks}
-          onChange={() => {
-            setShowSimilarStocks((prev) => {
-              return !prev;
-            });
-          }}
-        />
-      </div> */}
     </form>
   );
 };
