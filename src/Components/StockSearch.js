@@ -33,6 +33,7 @@ const StockSearch = (props) => {
       })
       .then((data) => {
         // NEEDS A REFACTOR
+        console.log("best matches", data.bestMatches);
         if (data.bestMatches) {
           if (data.bestMatches.length > 5) {
             for (let index = 0; index < 5; index++) {
