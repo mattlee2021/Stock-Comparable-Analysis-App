@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StockSearch Should match the snapshot 1`] = `
+<form>
+  <div
+    className="ticker"
+  >
+    <label>
+      Ticker
+    </label>
+    <input
+      className="searchBar"
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+    <button
+      className="disabled"
+      disabled={true}
+      onClick={[Function]}
+      type="submit"
+    >
+      Submit
+    </button>
+    <div
+      className="similarStock"
+    >
+      <label>
+         Show Similar Stocks 
+      </label>
+      <input
+        checked={false}
+        onChange={[Function]}
+        type="checkbox"
+      />
+    </div>
+  </div>
+  <div
+    className="searchResults"
+  />
+</form>
+`;

@@ -22,7 +22,8 @@ const StockSearch = (props) => {
   };
 
   const onChangeInput = (event) => {
-    setTicker(() => event.target.value);
+    const input = event.target.value;
+    setTicker(() => input);
     setSuggestedResults(() => []);
     fetch(
       `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${event.target.value}&apikey=ZY9GZNYZQM8C1MQC`
