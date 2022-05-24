@@ -11,11 +11,21 @@ const StockSearch = (props) => {
 
   //API KEY is TD8ZNN64UTNOK6DA
 
-  const onSubmitTickerHandler = (event) => {
+  const onSubmitTickerHandler = async (event) => {
     event.preventDefault();
-    FetchStocks(ticker, props.getStockData);
+    const data = await FetchStocks(ticker);
+    console.log("submit data", data);
+    props.getStockData(data, showSimilarStocks);
     if (showSimilarStocks) {
-      FetchSimilarStocks(ticker, props.getStockData);
+      const similarStockData = await FetchSimilarStocks(
+        ticker,
+        props.getStockData
+      );
+      console.log(similarStockData);
+      similarStockData.forEach((stockData) => {
+        console.log(stockData);
+        props.getStockData(stockData, true);
+      });
     }
     setTicker("");
     setSuggestedResults(() => []);

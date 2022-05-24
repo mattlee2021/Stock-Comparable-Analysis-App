@@ -1,7 +1,7 @@
 import FetchStocks from "./FetchStocks";
 
-const FetchSimilarStocks = (ticker, applyData) => {
-  fetch(
+const FetchSimilarStocks = (ticker) => {
+  return fetch(
     "https://stock-data-yahoo-finance-alternative.p.rapidapi.com/v6/finance/recommendationsbysymbol/" +
       ticker,
     {
@@ -20,7 +20,7 @@ const FetchSimilarStocks = (ticker, applyData) => {
         throw new Error("No similar companies can be obtained for this stock.");
       }
     })
-    .then((data) => {
+    .then(async (data) => {
       const similarStocks = data.finance.result[0].recommendedSymbols;
       /*
        data.finance.result[0].recommendedSymbols returns an array of 5 similar stocks in order from most similar (index 0) to less similar (index 4),
@@ -28,9 +28,12 @@ const FetchSimilarStocks = (ticker, applyData) => {
        Therefore, for every similar stock request we will have the original stock request and 4 similar stock requests 
        for a total of 5 stock requests for FetchStocks. There is a max of 5 stock requests/minute. 
        */
-      for (let i = 0; i < similarStocks.length - 1; i++) {
-        FetchStocks(similarStocks[i].symbol, applyData, true);
+      const result = [];
+      for (let i = 0; i < similarStocks.length; i++) {
+        const similarStockData = await FetchStocks(similarStocks[i].symbol);
+        result.push(similarStockData);
       }
+      return result;
     })
     .catch((error) => {
       alert(error);

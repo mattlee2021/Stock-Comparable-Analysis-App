@@ -7,8 +7,9 @@ form {
   position: relative;
   padding-top: 10px;
   display: inline-block;
-  width: 100%;
-  margin: 0 45rem;
+  width: 50%;
+  margin: 0 30%;
+  //margin: 0 30%;
 }
 
 .ticker button {
@@ -45,8 +46,9 @@ form {
 
 .searchResults {
   font-size: 14px;
-  width: 17%;
-  margin: auto;
+  width: 50%;
+  left: 32%;
+  
   position: relative;
   //right: 20px;
   cursor: pointer;
@@ -58,3 +60,5 @@ form {
   margin: 0 1rem;
   width: 15rem;
 }
+
+
