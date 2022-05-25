@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./StockSearch.scss";
 import FetchStocks from "../api/FetchStocks";
 import FetchSimilarStocks from "../api/FetchSimilarStocks";
+import FetchStockNames from "../api/FetchStockNames";
 
 const StockSearch = (props) => {
   const [showSimilarStocks, setShowSimilarStocks] = useState(false);
@@ -11,61 +12,72 @@ const StockSearch = (props) => {
 
   //API KEY is TD8ZNN64UTNOK6DA
 
+  const addStockToList = async () => {
+    props.getStockData(await FetchStocks(ticker), false);
+  };
+
+  const addSimilarStockToList = async () => {
+    const similarStockData = await FetchSimilarStocks(ticker);
+    similarStockData.forEach((stockData) => {
+      props.getStockData(stockData, true);
+    });
+  };
+
   const onSubmitTickerHandler = async (event) => {
     event.preventDefault();
-    const data = await FetchStocks(ticker);
-    console.log("submit data", data);
-    props.getStockData(data, showSimilarStocks);
+    addStockToList();
     if (showSimilarStocks) {
-      const similarStockData = await FetchSimilarStocks(
-        ticker,
-        props.getStockData
-      );
-      console.log(similarStockData);
-      similarStockData.forEach((stockData) => {
-        console.log(stockData);
-        props.getStockData(stockData, true);
-      });
+      addSimilarStockToList();
     }
     setTicker("");
     setSuggestedResults(() => []);
   };
 
-  const onChangeInput = (event) => {
+  const onChangeInput = async (event) => {
     const input = event.target.value;
     setTicker(() => input);
     setSuggestedResults(() => []);
-    fetch(
-      `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${event.target.value}&apikey=ZY9GZNYZQM8C1MQC`
-    )
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-      })
-      .then((data) => {
-        suggestedResultsSize =
-          data.bestMatches.length >= 4 ? 4 : data.bestMatches.length;
+    // fetch(
+    //   `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${event.target.value}&apikey=ZY9GZNYZQM8C1MQC`
+    // )
+    //   .then((response) => {
+    //     if (response.ok) {
+    //       return response.json();
+    //     }
+    //   })
+    //   .then((data) => {
+    //     suggestedResultsSize =
+    //       data.bestMatches.length >= 4 ? 4 : data.bestMatches.length;
 
-        for (let index = 0; index < suggestedResultsSize; index++) {
-          let key = index;
-          if (
-            data.bestMatches[key]["1. symbol"] &&
-            data.bestMatches[key]["2. name"]
-          ) {
-            setSuggestedResults((prev) => [
-              ...prev,
-              [
-                data.bestMatches[key]["1. symbol"],
-                data.bestMatches[key]["2. name"],
-              ],
-            ]);
-          }
-        }
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    //     for (let index = 0; index < suggestedResultsSize; index++) {
+    //       let key = index;
+    //       if (
+    //         data.bestMatches[key]["1. symbol"] &&
+    //         data.bestMatches[key]["2. name"]
+    //       ) {
+    //         setSuggestedResults((prev) => [
+    //           ...prev,
+    //           [
+    //             data.bestMatches[key]["1. symbol"],
+    //             data.bestMatches[key]["2. name"],
+    //           ],
+    //         ]);
+    //       }
+    //     }
+    //   })
+    //   .catch((e) => {
+    //     console.log(e);
+    //   });
+    const searchResults = await FetchStockNames(event, setSuggestedResults);
+    // console.log("searchResults", searchResults);
+    // if (searchResults) {
+    //   searchResults.forEach((searchResult) => {
+    //     setSuggestedResults((prev) => [...prev, searchResult]);
+    //   });
+    // }
+
+    //setSuggestedResults(() => {});
+    console.log("suggestedResults", suggestedResults);
   };
 
   return (
