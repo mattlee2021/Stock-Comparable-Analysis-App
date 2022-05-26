@@ -1,6 +1,6 @@
-const FetchStockNames = (event, setSuggestedResults) => {
+const FetchStockNames = (input) => {
   return fetch(
-    `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${event.target.value}&apikey=ZY9GZNYZQM8C1MQC`
+    `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${input}&apikey=ZY9GZNYZQM8C1MQC`
   )
     .then((response) => {
       if (response.ok) {
@@ -9,33 +9,24 @@ const FetchStockNames = (event, setSuggestedResults) => {
     })
     .then((data) => {
       const result = [];
-      const maxResults =
-        data.bestMatches.length >= 5 ? 5 : data.bestMatches.length;
+      const maxResults = data.bestMatches
+        ? data.bestMatches.length >= 5
+          ? 5
+          : data.bestMatches.length
+        : 0;
       for (let index = 0; index < maxResults; index++) {
         let key = index;
-        console.log(data.bestMatches);
+
         if (
           data.bestMatches[key]["1. symbol"] &&
           data.bestMatches[key]["2. name"]
         ) {
-          console.log("data match", [
-            data.bestMatches[key]["1. symbol"],
-            data.bestMatches[key]["2. name"],
-          ]);
-          setSuggestedResults((prev) => [
-            ...prev,
-            [
-              data.bestMatches[key]["1. symbol"],
-              data.bestMatches[key]["2. name"],
-            ],
-          ]);
           result.push([
             data.bestMatches[key]["1. symbol"],
             data.bestMatches[key]["2. name"],
           ]);
         }
       }
-      console.log("result", result);
       return result;
     })
     .catch((e) => {
