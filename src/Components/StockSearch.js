@@ -8,12 +8,15 @@ const StockSearch = (props) => {
   const [showSimilarStocks, setShowSimilarStocks] = useState(false);
   const [suggestedResults, setSuggestedResults] = useState([]);
   const [ticker, setTicker] = useState("");
-  let suggestedResultsSize;
+  let searchResults;
 
   //API KEY is TD8ZNN64UTNOK6DA
 
   const addStockToList = async () => {
-    props.getStockData(await FetchStocks(ticker), false);
+    const stockToAdd = await FetchStocks(ticker);
+    if (stockToAdd) {
+      props.getStockData(stockToAdd, false);
+    }
   };
 
   const addSimilarStockToList = async () => {
@@ -23,7 +26,7 @@ const StockSearch = (props) => {
     });
   };
 
-  const onSubmitTickerHandler = async (event) => {
+  const handleSubmitTicker = async (event) => {
     event.preventDefault();
     addStockToList();
     if (showSimilarStocks) {
@@ -34,50 +37,15 @@ const StockSearch = (props) => {
   };
 
   const onChangeInput = async (event) => {
+    console.log(event.target.value);
     const input = event.target.value;
+    console.log("input", input);
     setTicker(() => input);
     setSuggestedResults(() => []);
-    // fetch(
-    //   `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${event.target.value}&apikey=ZY9GZNYZQM8C1MQC`
-    // )
-    //   .then((response) => {
-    //     if (response.ok) {
-    //       return response.json();
-    //     }
-    //   })
-    //   .then((data) => {
-    //     suggestedResultsSize =
-    //       data.bestMatches.length >= 4 ? 4 : data.bestMatches.length;
-
-    //     for (let index = 0; index < suggestedResultsSize; index++) {
-    //       let key = index;
-    //       if (
-    //         data.bestMatches[key]["1. symbol"] &&
-    //         data.bestMatches[key]["2. name"]
-    //       ) {
-    //         setSuggestedResults((prev) => [
-    //           ...prev,
-    //           [
-    //             data.bestMatches[key]["1. symbol"],
-    //             data.bestMatches[key]["2. name"],
-    //           ],
-    //         ]);
-    //       }
-    //     }
-    //   })
-    //   .catch((e) => {
-    //     console.log(e);
-    //   });
-    const searchResults = await FetchStockNames(event, setSuggestedResults);
-    // console.log("searchResults", searchResults);
-    // if (searchResults) {
-    //   searchResults.forEach((searchResult) => {
-    //     setSuggestedResults((prev) => [...prev, searchResult]);
-    //   });
-    // }
-
-    //setSuggestedResults(() => {});
-    console.log("suggestedResults", suggestedResults);
+    searchResults = await FetchStockNames(input);
+    if (searchResults) {
+      setSuggestedResults(() => searchResults);
+    }
   };
 
   return (
@@ -93,7 +61,7 @@ const StockSearch = (props) => {
         <button
           type="submit"
           disabled={ticker.length === 0}
-          onClick={onSubmitTickerHandler}
+          onClick={handleSubmitTicker}
           className={ticker.length === 0 ? "disabled" : ""}
         >
           Submit
