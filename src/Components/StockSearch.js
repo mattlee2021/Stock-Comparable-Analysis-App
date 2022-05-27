@@ -21,9 +21,11 @@ const StockSearch = (props) => {
 
   const addSimilarStockToList = async () => {
     const similarStockData = await FetchSimilarStocks(ticker);
-    similarStockData.forEach((stockData) => {
-      props.getStockData(stockData, true);
-    });
+    if (similarStockData) {
+      similarStockData.forEach((stockData) => {
+        props.getStockData(stockData, true);
+      });
+    }
   };
 
   const handleSubmitTicker = async (event) => {

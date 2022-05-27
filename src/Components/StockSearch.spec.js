@@ -16,11 +16,10 @@ describe("StockSearch", () => {
   });
 
   it("Should call FetchStocks with the input", () => {
-    const mockGetStockData = jest.fn();
-    render(<StockSearch getStockData={mockGetStockData} />);
+    render(<StockSearch />);
     userEvent.type(screen.getByRole("textbox"), "AAPL");
     userEvent.click(screen.getByRole("button", { name: /submit/i }));
-    expect(FetchStocks).toHaveBeenCalledWith("AAPL", mockGetStockData);
+    expect(FetchStocks).toHaveBeenCalledWith("AAPL");
   });
 
   it("Should call FetchSimilarStocks with the input when the flag is selected", () => {
@@ -29,7 +28,7 @@ describe("StockSearch", () => {
     userEvent.type(screen.getByRole("textbox"), "AAPL");
     userEvent.click(screen.getByRole("checkbox"));
     userEvent.click(screen.getByRole("button", { name: /submit/i }));
-    expect(FetchSimilarStocks).toHaveBeenCalledWith("AAPL", mockGetStockData);
+    expect(FetchSimilarStocks).toHaveBeenCalledWith("AAPL");
   });
 
   it("Should disable the submit button if there is no inputted text", () => {
