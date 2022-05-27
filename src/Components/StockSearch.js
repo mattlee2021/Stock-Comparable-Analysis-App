@@ -28,12 +28,12 @@ const StockSearch = (props) => {
 
   const handleSubmitTicker = async (event) => {
     event.preventDefault();
+    setTicker("");
+    setSuggestedResults(() => []);
     addStockToList();
     if (showSimilarStocks) {
       addSimilarStockToList();
     }
-    setTicker("");
-    setSuggestedResults(() => []);
   };
 
   const onChangeInput = async (event) => {

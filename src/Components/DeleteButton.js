@@ -4,7 +4,7 @@ const DeleteButton = (props) => {
   const handleDeleteStock = (event) => {
     event.preventDefault();
     props.onStockChange(
-      props.stockData.filter((ticker, index) => index !== props.index)
+      props.stockData.filter((ticker) => ticker !== props.ticker)
     );
   };
 

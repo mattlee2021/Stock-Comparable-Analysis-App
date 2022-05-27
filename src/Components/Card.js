@@ -64,7 +64,7 @@ const Card = (props) => {
             return (
               <td>
                 <DeleteButton
-                  index={index}
+                  ticker={ticker}
                   stockData={stockData}
                   onStockChange={props.onStockChange}
                 />
