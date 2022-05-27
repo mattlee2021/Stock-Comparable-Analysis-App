@@ -22,7 +22,7 @@ function App() {
   return (
     <React.Fragment>
       <StockSearch getStockData={getStockData} />
-      <Card stockData={stockData} onStockChange={setStockData} />
+      <Card stockData={stockData} setStockData={setStockData} />
     </React.Fragment>
   );
 }

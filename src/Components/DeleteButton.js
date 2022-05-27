@@ -3,7 +3,7 @@ import "./DeleteButton.scss";
 const DeleteButton = (props) => {
   const handleDeleteStock = (event) => {
     event.preventDefault();
-    props.onStockChange(
+    props.setStockData(
       props.stockData.filter((ticker) => ticker !== props.ticker)
     );
   };
