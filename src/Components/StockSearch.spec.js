@@ -1,6 +1,6 @@
 import TestRenderer from "react-test-renderer";
 import StockSearch from "./StockSearch";
-import { screen, render } from "@testing-library/react";
+import { screen, render, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import FetchStocks from "../api/FetchStocks";
 import "@testing-library/jest-dom";
@@ -15,8 +15,9 @@ describe("StockSearch", () => {
     expect(testRenderer).toMatchSnapshot();
   });
 
-  it("Should call FetchStocks with the input", () => {
-    render(<StockSearch />);
+  it("Should add stock to the stock list", () => {
+    const mockGetStockData = jest.fn();
+    render(<StockSearch getStockData={mockGetStockData} />);
     userEvent.type(screen.getByRole("textbox"), "AAPL");
     userEvent.click(screen.getByRole("button", { name: /submit/i }));
     expect(FetchStocks).toHaveBeenCalledWith("AAPL");
