@@ -70,7 +70,7 @@ function App() {
         setStockData={setStockData}
       />
       {/* <Card stockData={stockData} setStockData={setStockData} /> */}
-      <TableContainer tableData={tableData} setStockData={setStockData} />
+      <TableContainer tableData={tableData} setTableData={setTableData} />
     </React.Fragment>
   );
 }

@@ -65,8 +65,9 @@ const Card = (props) => {
               <td>
                 <DeleteButton
                   ticker={ticker}
+                  tableNumber={props.tableNumber}
                   stockData={stockData}
-                  setStockData={props.setStockData}
+                  setTableData={props.setTableData}
                 />
               </td>
             );
