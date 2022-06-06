@@ -16,6 +16,9 @@ const StockSearch = (props) => {
     const stockToAdd = await FetchStocks(ticker);
     if (stockToAdd) {
       props.getStockData(stockToAdd, false);
+      // props.setStockData((prev) => {
+      //   return [...prev, newStock];
+      // });
     }
   };
 
@@ -39,9 +42,7 @@ const StockSearch = (props) => {
   };
 
   const onChangeInput = async (event) => {
-    console.log(event.target.value);
     const input = event.target.value;
-    console.log("input", input);
     setTicker(() => input);
     setSuggestedResults(() => []);
     searchResults = await FetchStockNames(input);
@@ -80,6 +81,10 @@ const StockSearch = (props) => {
             }}
           />
         </div>
+
+        <button type="submit" onClick={props.handleCreateTable}>
+          Create New Table
+        </button>
       </div>
       <div className="searchResults">
         {suggestedResults.map((stock) => {
