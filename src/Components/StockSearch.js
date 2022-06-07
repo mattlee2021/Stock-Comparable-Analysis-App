@@ -5,7 +5,7 @@ import FetchSimilarStocks from "../api/FetchSimilarStocks";
 import FetchStockNames from "../api/FetchStockNames";
 
 const StockSearch = (props) => {
-  const [showSimilarStocks, setShowSimilarStocks] = useState(false);
+  const [showSimilarStocks, setShowSimilarStocks] = useState(true);
   const [suggestedResults, setSuggestedResults] = useState([]);
   const [ticker, setTicker] = useState("");
   let searchResults;
@@ -15,7 +15,7 @@ const StockSearch = (props) => {
   const addStockToList = async () => {
     const stockToAdd = await FetchStocks(ticker);
     if (stockToAdd) {
-      props.getStockData(stockToAdd, false);
+      props.getStockData(stockToAdd);
       // props.setStockData((prev) => {
       //   return [...prev, newStock];
       // });
@@ -26,7 +26,7 @@ const StockSearch = (props) => {
     const similarStockData = await FetchSimilarStocks(ticker);
     if (similarStockData) {
       similarStockData.forEach((stockData) => {
-        props.getStockData(stockData, true);
+        props.getStockData(stockData);
       });
     }
   };
