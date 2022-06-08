@@ -16,9 +16,6 @@ const StockSearch = (props) => {
     const stockToAdd = await FetchStocks(ticker);
     if (stockToAdd) {
       props.getStockData(stockToAdd);
-      // props.setStockData((prev) => {
-      //   return [...prev, newStock];
-      // });
     }
   };
 
