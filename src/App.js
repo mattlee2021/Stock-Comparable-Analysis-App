@@ -12,21 +12,9 @@ function App() {
         return;
       }
     }
-
-    // generate new array with slice, push, and return the element ; immmutable is generate new reference
     const temp = tableData.slice();
     temp[temp.length - 1].push(newStock);
     setTableData(temp);
-    // setTableData((prev) => {
-    //   // console.log("table data", tableData);
-    //   //console.log("app prev", prev);
-    //   const lastTable = prev[prev.length - 1];
-
-    //   prev.pop();
-    //   lastTable.push(newStock);
-    //   console.log("lastTable", lastTable);
-    //   return [...prev, lastTable];
-    // });
   };
 
   const handleCreateTable = (event) => {

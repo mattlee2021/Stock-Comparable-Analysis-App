@@ -18,6 +18,7 @@ describe("StockSearch", () => {
   it("Should add stock to the stock list", () => {
     const mockGetStockData = jest.fn();
     render(<StockSearch getStockData={mockGetStockData} />);
+    userEvent.click(screen.getByRole("checkbox"));
     userEvent.type(screen.getByRole("textbox"), "AAPL");
     userEvent.click(screen.getByRole("button", { name: /submit/i }));
     expect(FetchStocks).toHaveBeenCalledWith("AAPL");
@@ -27,7 +28,6 @@ describe("StockSearch", () => {
     const mockGetStockData = jest.fn();
     render(<StockSearch getStockData={mockGetStockData} />);
     userEvent.type(screen.getByRole("textbox"), "AAPL");
-    userEvent.click(screen.getByRole("checkbox"));
     userEvent.click(screen.getByRole("button", { name: /submit/i }));
     expect(FetchSimilarStocks).toHaveBeenCalledWith("AAPL");
   });
