@@ -1,7 +1,7 @@
 import Card from "./Card";
 const TableContainer = (props) => {
   const { tableData, setTableData } = props;
-  console.log("tableData container", tableData);
+
   return tableData.map((stockData, index) => {
     return (
       <Card
