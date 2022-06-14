@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import StockSearch from "./components/StockSearch";
 import TableContainer from "./components/TableContainer";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+
+// need to handle similar stock search now that FB is not a stock ticker
 
 function App() {
   const [tableData, setTableData] = useState([[]]);
@@ -26,11 +30,13 @@ function App() {
 
   return (
     <React.Fragment>
-      <StockSearch
-        getStockData={getStockData}
-        handleCreateTable={handleCreateTable}
-      />
-      <TableContainer tableData={tableData} setTableData={setTableData} />
+      <DndProvider backend={HTML5Backend}>
+        <StockSearch
+          getStockData={getStockData}
+          handleCreateTable={handleCreateTable}
+        />
+        <TableContainer tableData={tableData} setTableData={setTableData} />
+      </DndProvider>
     </React.Fragment>
   );
 }
