@@ -7,7 +7,7 @@ const TableContainer = (props) => {
   const { tableData, setTableData } = props;
   const [isDragging, setIsDragging] = useState(false);
 
-  console.log("isDragging TableContainer", isDragging);
+  console.log("isDragging TableContainer", isDragging); // changes to false quickly when picking up non-last table
 
   const moveCard = useCallback(
     (dragIndex, hoverIndex) => {
@@ -46,10 +46,9 @@ const TableContainer = (props) => {
 
   return (
     <>
-      <div className={isDragging ? "dragging-border" : ""}>
-        {tableData.map((stockData, index) => (
+      {tableData.map((stockData, index) => (
+        <div className={isDragging ? "dragging-border" : ""}>
           <Card
-            className={isDragging ? "dragging-card" : ""}
             key={index}
             tableNumber={index}
             stockData={stockData}
@@ -57,8 +56,8 @@ const TableContainer = (props) => {
             moveCard={moveCard}
             setIsDragging={setIsDragging}
           />
-        ))}
-      </div>
+        </div>
+      ))}
     </>
   );
 

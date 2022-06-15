@@ -7,6 +7,7 @@ const Card = (props) => {
   const stockData = props.stockData;
   //console.log("stockData 1", stockData);
   const tableNumber = props.tableNumber;
+  console.log("tableNumber Card", tableNumber);
   const moveCard = props.moveCard;
   const ref = useRef(null);
 
@@ -57,6 +58,11 @@ const Card = (props) => {
     item: () => {
       return { tableNumber };
     },
+    isDragging: (monitor) => {
+      console.log("tableNumber", tableNumber);
+      console.log("monitor tablenumber", monitor.getItem().tableNumber);
+      return tableNumber >= monitor.getItem().tableNumber;
+    },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -67,77 +73,75 @@ const Card = (props) => {
   props.setIsDragging(isDragging);
 
   return (
-    <div className={isDragging ? "dragging-border" : ""}>
-      <table ref={ref} className={props.className}>
-        <thead>
-          <tr>
-            <th className="metricLabel stockNames"> Metrics </th>
-            {stockData.map((stockData) => {
-              return <th className="stockNames"> {stockData["Name"]} </th>;
-            })}
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th className="metricLabel">P/E</th>
-            {stockData.map((stockData) => {
-              return <td>{stockData["P/E"]}</td>;
-            })}
-          </tr>
-          <tr>
-            <th className="metricLabel">P/B</th>
-            {stockData.map((stockData) => {
-              return <td> {stockData["P/B"]} </td>;
-            })}
-          </tr>
-          <tr>
-            <th className="metricLabel">EV/EBITDA</th>
-            {stockData.map((stockData) => {
-              return <td> {stockData["EV/EBITDA"]} </td>;
-            })}
-          </tr>
-          <tr>
-            <th className="metricLabel">EV/Revenue</th>
-            {stockData.map((stockData) => {
-              return <td> {stockData["EV/Revenue"]} </td>;
-            })}
-          </tr>
-          <tr>
-            <th className="metricLabel">EPS</th>
-            {stockData.map((stockData) => {
-              return <td> {stockData["EPS"]} </td>;
-            })}
-          </tr>
-          <tr>
-            <th className="metricLabel">Profit Margin</th>
-            {stockData.map((stockData) => {
-              return <td> {stockData["Profit Margin"]} </td>;
-            })}
-          </tr>
-          <tr>
-            <th className="metricLabel">Sector</th>
-            {stockData.map((stockData) => {
-              return <td> {stockData["Sector"]} </td>;
-            })}
-          </tr>
-          <tr>
-            <td>&nbsp;</td>
-            {stockData.map((ticker, index) => {
-              return (
-                <td>
-                  <DeleteButton
-                    ticker={ticker}
-                    tableNumber={props.tableNumber}
-                    stockData={stockData}
-                    setTableData={props.setTableData}
-                  />
-                </td>
-              );
-            })}
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <table ref={ref} className={props.className}>
+      <thead>
+        <tr>
+          <th className="metricLabel stockNames"> Metrics </th>
+          {stockData.map((stockData) => {
+            return <th className="stockNames"> {stockData["Name"]} </th>;
+          })}
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th className="metricLabel">P/E</th>
+          {stockData.map((stockData) => {
+            return <td>{stockData["P/E"]}</td>;
+          })}
+        </tr>
+        <tr>
+          <th className="metricLabel">P/B</th>
+          {stockData.map((stockData) => {
+            return <td> {stockData["P/B"]} </td>;
+          })}
+        </tr>
+        <tr>
+          <th className="metricLabel">EV/EBITDA</th>
+          {stockData.map((stockData) => {
+            return <td> {stockData["EV/EBITDA"]} </td>;
+          })}
+        </tr>
+        <tr>
+          <th className="metricLabel">EV/Revenue</th>
+          {stockData.map((stockData) => {
+            return <td> {stockData["EV/Revenue"]} </td>;
+          })}
+        </tr>
+        <tr>
+          <th className="metricLabel">EPS</th>
+          {stockData.map((stockData) => {
+            return <td> {stockData["EPS"]} </td>;
+          })}
+        </tr>
+        <tr>
+          <th className="metricLabel">Profit Margin</th>
+          {stockData.map((stockData) => {
+            return <td> {stockData["Profit Margin"]} </td>;
+          })}
+        </tr>
+        <tr>
+          <th className="metricLabel">Sector</th>
+          {stockData.map((stockData) => {
+            return <td> {stockData["Sector"]} </td>;
+          })}
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          {stockData.map((ticker, index) => {
+            return (
+              <td>
+                <DeleteButton
+                  ticker={ticker}
+                  tableNumber={props.tableNumber}
+                  stockData={stockData}
+                  setTableData={props.setTableData}
+                />
+              </td>
+            );
+          })}
+        </tr>
+      </tbody>
+    </table>
   );
 };
 
