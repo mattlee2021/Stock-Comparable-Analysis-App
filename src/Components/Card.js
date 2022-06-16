@@ -7,7 +7,7 @@ const Card = (props) => {
   const stockData = props.stockData;
   //console.log("stockData 1", stockData);
   const tableNumber = props.tableNumber;
-  console.log("tableNumber Card", tableNumber);
+
   const moveCard = props.moveCard;
   const ref = useRef(null);
 
@@ -22,7 +22,6 @@ const Card = (props) => {
       if (!ref.current) {
         return;
       }
-      //console.log("item", item);
       const dragIndex = item.tableNumber; //index of element you are picking up to drag
       const hoverIndex = tableNumber; // index where you are placing the element
 
@@ -31,17 +30,15 @@ const Card = (props) => {
       }
 
       const hoverBoundingRect = ref.current?.getBoundingClientRect(); //gets the rectangular border of the element picked up
-      //console.log("hoverBoundingRect", hoverBoundingRect);
 
       const hoverMiddleY =
         (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
 
       const clientOffset = monitor.getClientOffset();
-      //console.log("element clientOffset monitor", clientOffset);
 
       const hoverClientY = clientOffset.y - hoverBoundingRect.top;
 
-      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+      if (dragIndex < hoverIndex && hoverClientY + 100 < hoverMiddleY) {
         return; // only move elements once they get passed the middle
       }
       // Dragging upwards
@@ -60,8 +57,13 @@ const Card = (props) => {
     },
     isDragging: (monitor) => {
       console.log("tableNumber", tableNumber);
-      console.log("monitor tablenumber", monitor.getItem().tableNumber);
-      return tableNumber >= monitor.getItem().tableNumber;
+      console.log(
+        "monitor.getItem().tableNumber",
+        monitor.getItem().tableNumber
+      );
+      return tableNumber !== monitor.getItem().tableNumber; // return true if you want to hide all cards when dragging
+
+      //return true;
     },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
@@ -70,78 +72,78 @@ const Card = (props) => {
 
   drag(drop(ref));
 
-  props.setIsDragging(isDragging);
-
   return (
-    <table ref={ref} className={props.className}>
-      <thead>
-        <tr>
-          <th className="metricLabel stockNames"> Metrics </th>
-          {stockData.map((stockData) => {
-            return <th className="stockNames"> {stockData["Name"]} </th>;
-          })}
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th className="metricLabel">P/E</th>
-          {stockData.map((stockData) => {
-            return <td>{stockData["P/E"]}</td>;
-          })}
-        </tr>
-        <tr>
-          <th className="metricLabel">P/B</th>
-          {stockData.map((stockData) => {
-            return <td> {stockData["P/B"]} </td>;
-          })}
-        </tr>
-        <tr>
-          <th className="metricLabel">EV/EBITDA</th>
-          {stockData.map((stockData) => {
-            return <td> {stockData["EV/EBITDA"]} </td>;
-          })}
-        </tr>
-        <tr>
-          <th className="metricLabel">EV/Revenue</th>
-          {stockData.map((stockData) => {
-            return <td> {stockData["EV/Revenue"]} </td>;
-          })}
-        </tr>
-        <tr>
-          <th className="metricLabel">EPS</th>
-          {stockData.map((stockData) => {
-            return <td> {stockData["EPS"]} </td>;
-          })}
-        </tr>
-        <tr>
-          <th className="metricLabel">Profit Margin</th>
-          {stockData.map((stockData) => {
-            return <td> {stockData["Profit Margin"]} </td>;
-          })}
-        </tr>
-        <tr>
-          <th className="metricLabel">Sector</th>
-          {stockData.map((stockData) => {
-            return <td> {stockData["Sector"]} </td>;
-          })}
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-          {stockData.map((ticker, index) => {
-            return (
-              <td>
-                <DeleteButton
-                  ticker={ticker}
-                  tableNumber={props.tableNumber}
-                  stockData={stockData}
-                  setTableData={props.setTableData}
-                />
-              </td>
-            );
-          })}
-        </tr>
-      </tbody>
-    </table>
+    <div className={isDragging ? "dragging-border" : ""}>
+      <table ref={ref} className={isDragging ? "dragging-card" : ""}>
+        <thead>
+          <tr>
+            <th className="metricLabel stockNames"> Metrics </th>
+            {stockData.map((stockData) => {
+              return <th className="stockNames"> {stockData["Name"]} </th>;
+            })}
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th className="metricLabel">P/E</th>
+            {stockData.map((stockData) => {
+              return <td>{stockData["P/E"]}</td>;
+            })}
+          </tr>
+          <tr>
+            <th className="metricLabel">P/B</th>
+            {stockData.map((stockData) => {
+              return <td> {stockData["P/B"]} </td>;
+            })}
+          </tr>
+          <tr>
+            <th className="metricLabel">EV/EBITDA</th>
+            {stockData.map((stockData) => {
+              return <td> {stockData["EV/EBITDA"]} </td>;
+            })}
+          </tr>
+          <tr>
+            <th className="metricLabel">EV/Revenue</th>
+            {stockData.map((stockData) => {
+              return <td> {stockData["EV/Revenue"]} </td>;
+            })}
+          </tr>
+          <tr>
+            <th className="metricLabel">EPS</th>
+            {stockData.map((stockData) => {
+              return <td> {stockData["EPS"]} </td>;
+            })}
+          </tr>
+          <tr>
+            <th className="metricLabel">Profit Margin</th>
+            {stockData.map((stockData) => {
+              return <td> {stockData["Profit Margin"]} </td>;
+            })}
+          </tr>
+          <tr>
+            <th className="metricLabel">Sector</th>
+            {stockData.map((stockData) => {
+              return <td> {stockData["Sector"]} </td>;
+            })}
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            {stockData.map((ticker, index) => {
+              return (
+                <td>
+                  <DeleteButton
+                    ticker={ticker}
+                    tableNumber={props.tableNumber}
+                    stockData={stockData}
+                    setTableData={props.setTableData}
+                  />
+                </td>
+              );
+            })}
+          </tr>
+        </tbody>
+      </table>
+    </div>
   );
 };
 

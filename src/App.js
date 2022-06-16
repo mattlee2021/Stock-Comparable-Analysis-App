@@ -4,8 +4,6 @@ import TableContainer from "./components/TableContainer";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
-// need to handle similar stock search now that FB is not a stock ticker
-
 function App() {
   const [tableData, setTableData] = useState([[]]);
 

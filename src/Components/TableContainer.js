@@ -1,18 +1,12 @@
 import Card from "./Card";
 import update from "immutability-helper";
-import { useCallback, useState } from "react";
-import "./TableContainer.scss";
+import { useCallback } from "react";
 
 const TableContainer = (props) => {
   const { tableData, setTableData } = props;
-  const [isDragging, setIsDragging] = useState(false);
-
-  console.log("isDragging TableContainer", isDragging); // changes to false quickly when picking up non-last table
 
   const moveCard = useCallback(
     (dragIndex, hoverIndex) => {
-      // console.log("dragIndex", dragIndex);
-      // console.log("hoverIndex", hoverIndex);
       setTableData((prevCards) =>
         update(prevCards, {
           $splice: [
@@ -24,8 +18,6 @@ const TableContainer = (props) => {
     },
     [setTableData]
   );
-
-  //console.log("tableData", tableData);
 
   // const renderCard = useCallback(
   //   (stockData, index) => {
@@ -47,31 +39,16 @@ const TableContainer = (props) => {
   return (
     <>
       {tableData.map((stockData, index) => (
-        <div className={isDragging ? "dragging-border" : ""}>
-          <Card
-            key={index}
-            tableNumber={index}
-            stockData={stockData}
-            setTableData={setTableData}
-            moveCard={moveCard}
-            setIsDragging={setIsDragging}
-          />
-        </div>
+        <Card
+          key={index}
+          tableNumber={index}
+          stockData={stockData}
+          setTableData={setTableData}
+          moveCard={moveCard}
+        />
       ))}
     </>
   );
-
-  // return tableData.map((stockData, index) => {
-  //   return (
-  //     <Card
-  //       key={index}
-  //       tableNumber={index}
-  //       stockData={stockData}
-  //       setTableData={setTableData}
-  //       moveCard={moveCard}
-  //     />
-  //   );
-  // });
 };
 
 export default TableContainer;
