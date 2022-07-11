@@ -6,16 +6,26 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 
 function App() {
   const [tableData, setTableData] = useState([[]]);
+  const [selectedTableIndex, setSelectedTableIndex] = useState(null);
+
+  console.log(process.env.REACT_APP_ALPHA_VANTAGE_KEY);
+
+  let tableIndex;
 
   const getStockData = (newStock) => {
-    const lastTable = tableData[tableData.length - 1];
-    for (const existingStock of lastTable) {
+    if (selectedTableIndex === null) {
+      tableIndex = tableData.length - 1;
+    } else {
+      tableIndex = selectedTableIndex;
+    }
+
+    for (const existingStock of tableData[tableIndex]) {
       if (existingStock.Ticker === newStock.Ticker) {
         return;
       }
     }
     const temp = tableData.slice();
-    temp[temp.length - 1].push(newStock);
+    temp[tableIndex].push(newStock);
     setTableData(temp);
   };
 
@@ -33,7 +43,12 @@ function App() {
           getStockData={getStockData}
           handleCreateTable={handleCreateTable}
         />
-        <TableContainer tableData={tableData} setTableData={setTableData} />
+        <TableContainer
+          tableData={tableData}
+          setSelectedTableIndex={setSelectedTableIndex}
+          setTableData={setTableData}
+          selectedTableIndex={selectedTableIndex}
+        />
       </DndProvider>
     </React.Fragment>
   );

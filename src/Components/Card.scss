@@ -3,7 +3,7 @@ table {
   position: relative;
   top: 10px;
   margin-bottom: 50px;
-  cursor: grab;
+  cursor: pointer;
 }
 
 .stockNames {
@@ -18,6 +18,12 @@ td {
   padding-right: 0.5em;
 }
 
+.isSelected {
+  background-color: rgba(194, 201, 196, 0.712);
+  width: fit-content;
+  padding: 10px;
+}
+
 .metricLabel {
   text-align: left;
   padding-top: 0.5em;
@@ -25,6 +31,8 @@ td {
 
 .dragging-border {
   border: dashed black;
-  padding-right: 2rem;
+  padding-right: 2rem;  
 }
+
+
 

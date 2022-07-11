@@ -1,6 +1,6 @@
 const FetchStockNames = (input) => {
   return fetch(
-    `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${input}&apikey=ZY9GZNYZQM8C1MQC`
+    `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${input}&apikey=${process.env.REACT_APP_ALPHA_VANTAGE_KEY}`
   )
     .then((response) => {
       if (response.ok) {

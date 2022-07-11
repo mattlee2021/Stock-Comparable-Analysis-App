@@ -1,9 +1,11 @@
 import Card from "./Card";
 import update from "immutability-helper";
 import { useCallback } from "react";
+import "./TableContainer.scss";
 
 const TableContainer = (props) => {
-  const { tableData, setTableData } = props;
+  const { tableData, setTableData, setSelectedTableIndex, selectedTableIndex } =
+    props;
 
   const moveCard = useCallback(
     (dragIndex, hoverIndex) => {
@@ -19,25 +21,8 @@ const TableContainer = (props) => {
     [setTableData]
   );
 
-  // const renderCard = useCallback(
-  //   (stockData, index) => {
-  //     return (
-  //       <Card
-  //         className={isDragging ? "dragging-card" : ""}
-  //         key={index}
-  //         tableNumber={index}
-  //         stockData={stockData}
-  //         setTableData={setTableData}
-  //         moveCard={moveCard}
-  //         setIsDragging={setIsDragging}
-  //       />
-  //     );
-  //   },
-  //   [isDragging]
-  // );
-
   return (
-    <>
+    <div className="tableContainer">
       {tableData.map((stockData, index) => (
         <Card
           key={index}
@@ -45,9 +30,13 @@ const TableContainer = (props) => {
           stockData={stockData}
           setTableData={setTableData}
           moveCard={moveCard}
+          onClick={() => {
+            setSelectedTableIndex(index);
+          }}
+          isSelected={index === selectedTableIndex}
         />
       ))}
-    </>
+    </div>
   );
 };
 
