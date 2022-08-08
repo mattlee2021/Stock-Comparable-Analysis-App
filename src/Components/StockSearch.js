@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./StockSearch.scss";
+import styles from "./StockSearch.module.css";
 import FetchStocks from "../api/FetchStocks";
 import FetchSimilarStocks from "../api/FetchSimilarStocks";
 import FetchStockNames from "../api/FetchStockNames";
@@ -50,25 +50,32 @@ const StockSearch = (props) => {
 
   return (
     <form>
-      <div className="ticker">
-        <label>Ticker</label>
+      <div className={styles.ticker}>
+        <label className={styles.tickerLabel}>Ticker</label>
         <input
           type="text"
           value={ticker}
           onChange={onChangeInput}
-          className="searchBar"
+          className={styles.searchBar}
         />
         <button
           type="submit"
           disabled={ticker.length === 0}
           onClick={handleSubmitTicker}
-          className={ticker.length === 0 ? "disabled" : ""}
+          className={
+            ticker.length === 0
+              ? styles.tickerButtonDisabled
+              : styles.tickerButton
+          }
         >
           Submit
         </button>
-        <div className="similarStock">
-          <label> Show Similar Stocks </label>
+        <div className={styles.similarStock}>
+          <label className={styles.similarStockLabel}>
+            Show Similar Stocks
+          </label>
           <input
+            className={styles.similarStockInput}
             type="checkbox"
             checked={showSimilarStocks}
             onChange={() => {
@@ -79,11 +86,15 @@ const StockSearch = (props) => {
           />
         </div>
 
-        <button type="submit" onClick={props.handleCreateTable}>
+        <button
+          type="submit"
+          onClick={props.handleCreateTable}
+          className={styles.tickerButton}
+        >
           Create New Table
         </button>
       </div>
-      <div className="searchResults">
+      <div className={styles.searchResults}>
         {suggestedResults.map((stock) => {
           return (
             <ul

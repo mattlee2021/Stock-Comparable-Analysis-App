@@ -1,7 +1,7 @@
 import Card from "./Card";
 import update from "immutability-helper";
 import { useCallback } from "react";
-import "./TableContainer.scss";
+import styles from "./TableContainer.module.css";
 
 const TableContainer = (props) => {
   const { tableData, setTableData, setSelectedTableIndex, selectedTableIndex } =
@@ -22,7 +22,7 @@ const TableContainer = (props) => {
   );
 
   return (
-    <div className="tableContainer">
+    <div className={styles.tableContainer}>
       {tableData.map((stockData, index) => (
         <Card
           key={index}

@@ -10,25 +10,30 @@ form {
   display: inline-block;
   width: 50%;
   margin: 0 30%;
-  //margin: 0 30%;
 }
 
-.ticker button {
+.tickerButton {
   border-radius: 8px;
   margin: auto;
   border: 3px solid black;
   color: black;
   position: absolute;
   background-color: white;
-  &.disabled {
-    border: 3px solid #999999;
-    background-color: #cccccc;
-    color: #666666;
-  }
+
   cursor: pointer;
 }
 
-.ticker label {
+.tickerButtonDisabled {
+  border-radius: 8px;
+  margin: auto;
+  position: absolute;
+  cursor: pointer;
+  border: 3px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+.tickerLabel {
   font-size: 20px;
 }
 
@@ -37,11 +42,11 @@ form {
   margin-left: 5rem;
 }
 
-.similarStock label {
+.similarStockLabel {
   font-size: 17px;
 }
 
-.similarStock input {
+.similarStockInput {
   cursor: pointer;
 }
 
@@ -49,9 +54,9 @@ form {
   font-size: 14px;
   width: 50%;
   left: 32%;
-  
+
   position: relative;
-  //right: 20px;
+  right: 20px;
   cursor: pointer;
 }
 
@@ -61,5 +66,3 @@ form {
   margin: 0 1rem;
   width: 15rem;
 }
-
-

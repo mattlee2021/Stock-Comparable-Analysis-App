@@ -1,13 +1,11 @@
 import React, { useRef } from "react";
-import "./Card.scss";
+import styles from "./Card.module.css";
 import DeleteButton from "./DeleteButton";
 import { useDrag, useDrop } from "react-dnd";
 
 const Card = (props) => {
   const stockData = props.stockData;
   const tableNumber = props.tableNumber;
-
-  console.log("selected table", props.isSelected);
 
   const moveCard = props.moveCard;
   const ref = useRef(null);
@@ -74,59 +72,61 @@ const Card = (props) => {
   drag(drop(ref));
 
   return (
-    <div className={props.isSelected ? "isSelected" : ""}>
+    <div className={props.isSelected ? styles.isSelected : ""}>
       <div
-        className={isDragging ? "dragging-border" : ""}
+        className={isDragging ? styles.draggingBorder : ""}
         onClick={props.onClick}
       >
-        <table ref={ref} className={isDragging ? "dragging-card" : ""}>
+        <table ref={ref} className={isDragging ? styles.draggingCard : ""}>
           <thead>
             <tr>
-              <th className="metricLabel stockNames"> Metrics </th>
+              <th className={styles.metricLabelStockNames}> Metrics </th>
               {stockData.map((stockData) => {
-                return <th className="stockNames"> {stockData["Name"]} </th>;
+                return (
+                  <th className={styles.stockNames}> {stockData["Name"]} </th>
+                );
               })}
             </tr>
           </thead>
           <tbody>
             <tr>
-              <th className="metricLabel">P/E</th>
+              <th className={styles.metricLabel}>P/E</th>
               {stockData.map((stockData) => {
                 return <td>{stockData["P/E"]}</td>;
               })}
             </tr>
             <tr>
-              <th className="metricLabel">P/B</th>
+              <th className={styles.metricLabel}>P/B</th>
               {stockData.map((stockData) => {
                 return <td> {stockData["P/B"]} </td>;
               })}
             </tr>
             <tr>
-              <th className="metricLabel">EV/EBITDA</th>
+              <th className={styles.metricLabel}>EV/EBITDA</th>
               {stockData.map((stockData) => {
                 return <td> {stockData["EV/EBITDA"]} </td>;
               })}
             </tr>
             <tr>
-              <th className="metricLabel">EV/Revenue</th>
+              <th className={styles.metricLabel}>EV/Revenue</th>
               {stockData.map((stockData) => {
                 return <td> {stockData["EV/Revenue"]} </td>;
               })}
             </tr>
             <tr>
-              <th className="metricLabel">EPS</th>
+              <th className={styles.metricLabel}>EPS</th>
               {stockData.map((stockData) => {
                 return <td> {stockData["EPS"]} </td>;
               })}
             </tr>
             <tr>
-              <th className="metricLabel">Profit Margin</th>
+              <th className={styles.metricLabel}>Profit Margin</th>
               {stockData.map((stockData) => {
                 return <td> {stockData["Profit Margin"]} </td>;
               })}
             </tr>
             <tr>
-              <th className="metricLabel">Sector</th>
+              <th className={styles.metricLabel}>Sector</th>
               {stockData.map((stockData) => {
                 return <td> {stockData["Sector"]} </td>;
               })}

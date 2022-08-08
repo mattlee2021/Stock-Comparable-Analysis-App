@@ -1,4 +1,4 @@
-import "./DeleteButton.scss";
+import styles from "./DeleteButton.module.css";
 
 const DeleteButton = (props) => {
   const handleDeleteStock = (event) => {
@@ -14,7 +14,7 @@ const DeleteButton = (props) => {
   return (
     <button
       onClick={handleDeleteStock}
-      className="deleteButton"
+      className={styles.deleteButton}
       data-testid="delete-button"
     >
       Delete
