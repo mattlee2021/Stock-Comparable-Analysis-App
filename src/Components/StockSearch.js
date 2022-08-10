@@ -50,7 +50,7 @@ const StockSearch = (props) => {
 
   return (
     <form>
-      <div className={styles.ticker}>
+      <div className={styles.inputContainer}>
         <label className={styles.tickerLabel}>Ticker</label>
         <input
           type="text"
@@ -70,12 +70,11 @@ const StockSearch = (props) => {
         >
           Submit
         </button>
-        <div className={styles.similarStock}>
-          <label className={styles.similarStockLabel}>
-            Show Similar Stocks
-          </label>
+      </div>
+      <div className={styles.featureContainer}>
+        <div className={styles.similarStockFlag}>
+          Show Similar Stocks
           <input
-            className={styles.similarStockInput}
             type="checkbox"
             checked={showSimilarStocks}
             onChange={() => {
@@ -85,15 +84,15 @@ const StockSearch = (props) => {
             }}
           />
         </div>
-
         <button
           type="submit"
           onClick={props.handleCreateTable}
-          className={styles.tickerButton}
+          className={styles.newTableButton}
         >
           Create New Table
         </button>
       </div>
+
       <div className={styles.searchResults}>
         {suggestedResults.map((stock) => {
           return (

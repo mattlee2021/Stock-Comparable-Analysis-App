@@ -1,4 +1,4 @@
-form {
+/* form {
   position: relative;
   font-family: Arial, Helvetica, sans-serif;
   min-height: 185px;
@@ -19,7 +19,6 @@ form {
   color: black;
   position: absolute;
   background-color: white;
-
   cursor: pointer;
 }
 
@@ -65,4 +64,98 @@ form {
   font-size: 15px;
   margin: 0 1rem;
   width: 15rem;
+} */
+
+form {
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: 185px;
+  width: 100%;
+}
+
+.inputContainer {
+  padding-top: 10px;
+  display: inline-block;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  margin: auto;
+  width: fit-content;
+}
+
+.tickerLabel {
+  font-size: 20px;
+}
+
+.searchBar {
+  border-radius: 4px;
+  font-size: 15px;
+  margin: 0 1rem;
+  width: 15rem;
+}
+
+.tickerButton {
+  border-radius: 8px;
+  width: 75px;
+  border: 3px solid black;
+  color: black;
+  position: absolute;
+  cursor: pointer;
+}
+
+.tickerButtonDisabled {
+  border-radius: 8px;
+  width: 75px;
+  position: absolute;
+  color: #666666;
+  border: 3px solid #999999;
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.featureContainer {
+  /* responsive design here*/
+  display: block;
+  width: fit-content;
+  /* flex-direction: column; */
+  position: absolute;
+  padding-top: 10px;
+  right: 400px;
+  /* align-items: center; */
+}
+
+/* @media (max-width: 1024px) {
+  .featureContainer {
+
+    display: block;
+    width: min-content;
+
+    position: absolute;
+    padding-top: 10px;
+    
+    left: 0px;
+  }
+} */
+
+/* .similarStockFlag {
+  font-size: 17px;
+} */
+
+.newTableButton {
+  border-radius: 8px;
+  border: 3px solid black;
+  color: black;
+  cursor: pointer;
+  width: 135px;
+  margin-top: 20px;
+}
+
+.searchResults {
+  width: 100%;
+  font-size: 14px;
+  position: relative;
+  margin: auto;
+  display: block;
+  cursor: pointer;
 }
