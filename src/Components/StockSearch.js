@@ -50,27 +50,44 @@ const StockSearch = (props) => {
 
   return (
     <form>
-      <div className={styles.inputContainer}>
-        <label className={styles.tickerLabel}>Ticker</label>
-        <input
-          type="text"
-          value={ticker}
-          onChange={onChangeInput}
-          className={styles.searchBar}
-        />
-        <button
-          type="submit"
-          disabled={ticker.length === 0}
-          onClick={handleSubmitTicker}
-          className={
-            ticker.length === 0
-              ? styles.tickerButtonDisabled
-              : styles.tickerButton
-          }
-        >
-          Submit
-        </button>
+      <div className={styles.searchContainer}>
+        <div className={styles.inputContainer}>
+          <label className={styles.tickerLabel}>Ticker</label>
+          <input
+            type="text"
+            value={ticker}
+            onChange={onChangeInput}
+            className={styles.searchBar}
+          />
+          <button
+            type="submit"
+            disabled={ticker.length === 0}
+            onClick={handleSubmitTicker}
+            className={
+              ticker.length === 0
+                ? styles.tickerButtonDisabled
+                : styles.tickerButton
+            }
+          >
+            Submit
+          </button>
+        </div>
+        <div className={styles.searchResults}>
+          {suggestedResults.map((stock) => {
+            return (
+              <ul
+                onClick={() => {
+                  setTicker(() => stock[0]);
+                  setSuggestedResults(() => []);
+                }}
+              >
+                Symbol: {stock[0]} Name: {stock[1]}
+              </ul>
+            );
+          })}
+        </div>
       </div>
+
       <div className={styles.featureContainer}>
         <div className={styles.similarStockFlag}>
           Show Similar Stocks
@@ -91,21 +108,6 @@ const StockSearch = (props) => {
         >
           Create New Table
         </button>
-      </div>
-
-      <div className={styles.searchResults}>
-        {suggestedResults.map((stock) => {
-          return (
-            <ul
-              onClick={() => {
-                setTicker(() => stock[0]);
-                setSuggestedResults(() => []);
-              }}
-            >
-              Symbol: {stock[0]} Name: {stock[1]}
-            </ul>
-          );
-        })}
       </div>
     </form>
   );
