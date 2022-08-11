@@ -80,13 +80,13 @@ form {
 }
 
 .inputContainer {
-  padding-right: 75px;
+  padding-right: 71px;
 }
 
 .searchResults {
   font-size: 14px;
   cursor: pointer;
-  padding-left: 75px
+  width: 350px;
 }
 
 .tickerLabel {
@@ -155,5 +155,3 @@ form {
   width: 135px;
   margin-top: 20px;
 }
-
-/* use flexbox with search bar */
