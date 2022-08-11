@@ -30,20 +30,10 @@ function App() {
     setTableData(temp);
   };
 
-  const handleCreateTable = (event) => {
-    event.preventDefault();
-    setTableData((prev) => {
-      return [...prev, []];
-    });
-  };
-
   return (
     <React.Fragment>
       <DndProvider backend={HTML5Backend}>
-        <StockSearch
-          getStockData={getStockData}
-          handleCreateTable={handleCreateTable}
-        />
+        <StockSearch getStockData={getStockData} setTableData={setTableData} />
         <TableContainer
           tableData={tableData}
           setSelectedTableIndex={setSelectedTableIndex}

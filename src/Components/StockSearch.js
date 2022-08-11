@@ -3,6 +3,7 @@ import styles from "./StockSearch.module.css";
 import FetchStocks from "../api/FetchStocks";
 import FetchSimilarStocks from "../api/FetchSimilarStocks";
 import FetchStockNames from "../api/FetchStockNames";
+import NewTableButton from "./NewTableButton";
 
 const StockSearch = (props) => {
   const [showSimilarStocks, setShowSimilarStocks] = useState(true);
@@ -102,13 +103,7 @@ const StockSearch = (props) => {
               }}
             />
           </div>
-          <button
-            type="submit"
-            onClick={props.handleCreateTable}
-            className={styles.newTableButton}
-          >
-            Create New Table
-          </button>
+          <NewTableButton setTableData={props.setTableData} />
         </div>
       </div>
     </form>
