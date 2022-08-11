@@ -3,6 +3,7 @@ import StockSearch from "./components/StockSearch";
 import TableContainer from "./components/TableContainer";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import "./index.css";
 
 function App() {
   const [tableData, setTableData] = useState([[]]);

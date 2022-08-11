@@ -1,75 +1,21 @@
-/* form {
-  position: relative;
-  font-family: Arial, Helvetica, sans-serif;
-  min-height: 185px;
-}
-
-.ticker {
-  position: relative;
-  padding-top: 10px;
-  display: inline-block;
-  width: 50%;
-  margin: 0 30%;
-}
-
-.tickerButton {
-  border-radius: 8px;
-  margin: auto;
-  border: 3px solid black;
-  color: black;
-  position: absolute;
-  background-color: white;
-  cursor: pointer;
-}
-
-.tickerButtonDisabled {
-  border-radius: 8px;
-  margin: auto;
-  position: absolute;
-  cursor: pointer;
-  border: 3px solid #999999;
-  background-color: #cccccc;
-  color: #666666;
-}
-
-.tickerLabel {
-  font-size: 20px;
-}
-
-.similarStock {
-  display: inline-block;
-  margin-left: 5rem;
-}
-
-.similarStockLabel {
-  font-size: 17px;
-}
-
-.similarStockInput {
-  cursor: pointer;
-}
-
-.searchResults {
-  font-size: 14px;
-  width: 50%;
-  left: 32%;
-
-  position: relative;
-  right: 20px;
-  cursor: pointer;
-}
-
-.searchBar {
-  border-radius: 4px;
-  font-size: 15px;
-  margin: 0 1rem;
-  width: 15rem;
-} */
-
 form {
   font-family: Arial, Helvetica, sans-serif;
   min-height: 185px;
   width: 100%;
+}
+
+.flexContainer {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding-top: 10px;
+  flex-wrap: wrap-reverse;
+}
+
+.featureContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .searchContainer {
@@ -77,6 +23,7 @@ form {
   flex-direction: column;
   align-items: center;
   margin-top: 10px;
+  min-width: 405px;
 }
 
 .inputContainer {
@@ -119,34 +66,6 @@ form {
   cursor: not-allowed;
 }
 
-.featureContainer {
-  /* responsive design here*/
-  display: block;
-  width: fit-content;
-  /* flex-direction: column; */
-  position: absolute;
-  padding-top: 10px;
-  right: 400px;
-  /* align-items: center; */
-}
-
-/* @media (max-width: 1024px) {
-  .featureContainer {
-
-    display: block;
-    width: min-content;
-
-    position: absolute;
-    padding-top: 10px;
-    
-    left: 0px;
-  }
-} */
-
-/* .similarStockFlag {
-  font-size: 17px;
-} */
-
 .newTableButton {
   border-radius: 8px;
   border: 3px solid black;
@@ -154,4 +73,16 @@ form {
   cursor: pointer;
   width: 135px;
   margin-top: 20px;
+}
+
+@media(max-width: 605px) {
+  .featureContainer {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 25px;
+  }
+
+  .newTableButton {
+    margin-top: 0px;
+  }
 }
