@@ -10,6 +10,7 @@ form {
   gap: 20px;
   padding-top: 10px;
   flex-wrap: wrap-reverse;
+  min-height: 260px;
 }
 
 .featureContainer {
