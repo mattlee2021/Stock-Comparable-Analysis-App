@@ -103,7 +103,10 @@ const StockSearch = (props) => {
               }}
             />
           </div>
-          <NewTableButton setTableData={props.setTableData} />
+          <NewTableButton
+            setTableData={props.setTableData}
+            setSelectedTableIndex={props.setSelectedTableIndex}
+          />
         </div>
       </div>
     </form>

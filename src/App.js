@@ -7,7 +7,7 @@ import "./index.css";
 
 function App() {
   const [tableData, setTableData] = useState([[]]);
-  const [selectedTableIndex, setSelectedTableIndex] = useState(null);
+  const [selectedTableIndex, setSelectedTableIndex] = useState(0);
 
   console.log(process.env.REACT_APP_ALPHA_VANTAGE_KEY);
 
@@ -33,7 +33,11 @@ function App() {
   return (
     <React.Fragment>
       <DndProvider backend={HTML5Backend}>
-        <StockSearch getStockData={getStockData} setTableData={setTableData} />
+        <StockSearch
+          getStockData={getStockData}
+          setTableData={setTableData}
+          setSelectedTableIndex={setSelectedTableIndex}
+        />
         <TableContainer
           tableData={tableData}
           setSelectedTableIndex={setSelectedTableIndex}
