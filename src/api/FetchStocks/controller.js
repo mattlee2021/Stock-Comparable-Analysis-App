@@ -1,4 +1,4 @@
-import StockData from "./stockData.service.js";
+import StockData from "../services/stockData.service.js";
 
 export class Controller {
   async getStockData(req, res) {

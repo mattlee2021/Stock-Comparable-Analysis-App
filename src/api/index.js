@@ -3,13 +3,17 @@
 // listen on a port
 
 import express from "express";
-import controller from "./FetchStocks/controller.js";
+import FetchStocksController from "./FetchStocks/controller.js";
+import FetchStockNamesController from "./FetchStockNames/controller.js";
+import FetchSimilarStocksController from "./FetchSimilarStocks/controller.js";
 
 //const express = require("express");
 const app = express();
 app.use(express.json());
 
-app.post("/stockData", controller.getStockData);
+app.post("/stockData", FetchStocksController.getStockData);
+app.post("/matchingStocksName", FetchStockNamesController.getStockNames);
+app.post("/similarStocks", FetchSimilarStocksController.getSimilarTickers);
 
 app.get("/healthCheck", (req, res) => {
   res.send("Hello World");
