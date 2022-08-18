@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "./StockSearch.module.css";
 import FetchStocks from "../api/FetchStocks/stockData.service";
 import FetchSimilarStocks from "../api/FetchSimilarStocks/similarTickers.service";
-import FetchStockNames from "../api/FetchStockNames";
+import FetchStockNames from "../api/FetchStockNames/stockNames.service";
 import NewTableButton from "./NewTableButton";
 
 const StockSearch = (props) => {
