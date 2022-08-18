@@ -1,4 +1,4 @@
-import FetchStocks from "./FetchStocks";
+import FetchStocks from "../FetchStocks/stockData.service";
 
 const FetchSimilarStocks = (ticker) => {
   return fetch(

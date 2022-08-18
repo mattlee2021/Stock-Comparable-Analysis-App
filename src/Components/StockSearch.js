@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./StockSearch.module.css";
-import FetchStocks from "../api/FetchStocks";
-import FetchSimilarStocks from "../api/FetchSimilarStocks";
+import FetchStocks from "../api/FetchStocks/stockData.service";
+import FetchSimilarStocks from "../api/FetchSimilarStocks/similarTickers.service";
 import FetchStockNames from "../api/FetchStockNames";
 import NewTableButton from "./NewTableButton";
 
