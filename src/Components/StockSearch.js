@@ -1,9 +1,7 @@
 import { useState } from "react";
 import styles from "./StockSearch.module.css";
-import FetchStocks from "../api/FetchStocks/stockData.service";
-import FetchSimilarStocks from "../api/FetchSimilarStocks/similarTickers.service";
-import FetchStockNames from "../api/FetchStockNames/stockNames.service";
 import NewTableButton from "./NewTableButton";
+import stockApiService from "./stockApi.service";
 
 const StockSearch = (props) => {
   const [showSimilarStocks, setShowSimilarStocks] = useState(true);
@@ -16,39 +14,40 @@ const StockSearch = (props) => {
   const addStockToList = async () => {
     // api service file, apiService.getStocks(ticker) <- axios calling backend api; have both FE and BE working
     // in api service file, have a method that calls the similar stocks API and then passes that information to the stock Data api
-    const stockToAdd = await FetchStocks(ticker);
+    const stockToAdd = await stockApiService.getStockData(ticker);
+    console.log("stockToAdd", stockToAdd);
     if (stockToAdd) {
       props.getStockData(stockToAdd);
     }
   };
 
-  const addSimilarStockToList = async () => {
-    const similarStockData = await FetchSimilarStocks(ticker);
-    if (similarStockData) {
-      similarStockData.forEach((stockData) => {
-        props.getStockData(stockData);
-      });
-    }
-  };
+  // const addSimilarStockToList = async () => {
+  //   const similarStockData = await FetchSimilarStocks(ticker);
+  //   if (similarStockData) {
+  //     similarStockData.forEach((stockData) => {
+  //       props.getStockData(stockData);
+  //     });
+  //   }
+  // };
 
   const handleSubmitTicker = async (event) => {
     event.preventDefault();
     setTicker("");
     setSuggestedResults(() => []);
     addStockToList();
-    if (showSimilarStocks) {
-      addSimilarStockToList();
-    }
+    // if (showSimilarStocks) {
+    //   addSimilarStockToList();
+    // }
   };
 
   const onChangeInput = async (event) => {
     const input = event.target.value;
     setTicker(() => input);
-    setSuggestedResults(() => []);
-    searchResults = await FetchStockNames(input);
-    if (searchResults) {
-      setSuggestedResults(() => searchResults);
-    }
+    // setSuggestedResults(() => []);
+    // searchResults = await FetchStockNames(input);
+    // if (searchResults) {
+    //   setSuggestedResults(() => searchResults);
+    // }
   };
 
   return (

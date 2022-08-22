@@ -12,7 +12,7 @@ const app = express();
 app.use(express.json());
 
 app.post("/stockData", FetchStocksController.getStockData);
-app.post("/matchingStocksName", FetchStockNamesController.getStockNames);
+app.post("/matchingStockNames", FetchStockNamesController.getStockNames);
 app.post("/similarStocks", FetchSimilarStocksController.getSimilarTickers);
 
 app.get("/healthCheck", (req, res) => {

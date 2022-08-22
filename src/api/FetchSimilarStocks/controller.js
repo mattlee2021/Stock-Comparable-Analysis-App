@@ -1,4 +1,4 @@
-import SimilarStocks from "./similarTickers.service.js";
+import SimilarStocks from "../services/similarTickers.service.js";
 
 class Controller {
   async getSimilarTickers(req, res) {
