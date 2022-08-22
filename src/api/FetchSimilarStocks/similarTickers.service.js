@@ -16,7 +16,16 @@ class SimilarStocks {
       `/v6/finance/recommendationsbysymbol/${ticker}`
     );
     const similarStocks = response.data.finance.result[0].recommendedSymbols;
-    return similarStocks;
+    const similarStocksResult = similarStocks.map((stockData) => {
+      return stockData.symbol;
+    });
+    const result = {
+      status: "success",
+      data: {
+        similarStocksResult,
+      },
+    };
+    return result;
   }
 }
 

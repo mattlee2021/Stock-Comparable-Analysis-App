@@ -14,30 +14,63 @@ class StockData {
         apikey: "ZY9GZNYZQM8C1MQC",
       },
     });
-    const result = {
-      Ticker: stockData.data.Symbol,
-      Name: stockData.data.Name,
-      "P/E": stockData.data.PERatio,
-      "P/B": stockData.data.PriceToBookRatio,
-      EPS: stockData.data.EPS,
-      "EV/EBITDA": stockData.data.EVToEBITDA,
-      "EV/Revenue": stockData.data.EVToRevenue,
-      "Profit Margin": stockData.data.ProfitMargin,
-      Sector: stockData.data.Sector,
-    };
-    return result;
+    console.log("stockData", stockData);
+    if (stockData.data.Symbol) {
+      const stockInformation = {
+        Ticker: stockData.data.Symbol,
+        Name: stockData.data.Name,
+        "P/E": stockData.data.PERatio,
+        "P/B": stockData.data.PriceToBookRatio,
+        EPS: stockData.data.EPS,
+        "EV/EBITDA": stockData.data.EVToEBITDA,
+        "EV/Revenue": stockData.data.EVToRevenue,
+        "Profit Margin": stockData.data.ProfitMargin,
+        Sector: stockData.data.Sector,
+      };
+
+      const result = {
+        status: "success",
+        data: {
+          stockInformation,
+        },
+      };
+
+      return result;
+    } else {
+      const errorResponse = {
+        status: "fail",
+        data: { "error message": "No avaliable data for " + ticker },
+      };
+      return errorResponse;
+    }
   }
 
   async fetchMatchingName(input) {
-    const matchingNames = await this.instance.get("/query", {
+    const matchingNamesData = await this.instance.get("/query", {
       params: {
         function: "SYMBOL_SEARCH",
         keywords: input,
         apikey: "ZY9GZNYZQM8C1MQC",
       },
     });
-
-    return matchingNames.data;
+    if (matchingNamesData.data.bestMatches.length) {
+      const matchingStockNames = matchingNamesData.data.bestMatches.map(
+        (stockData) => stockData["2. name"]
+      );
+      const response = {
+        status: "success",
+        data: {
+          matchingStockNames,
+        },
+      };
+      return response;
+    } else {
+      const errorResponse = {
+        status: "fail",
+        data: { "error message": "No tickers similar to tickers " + input },
+      };
+      return errorResponse;
+    }
   }
 }
 
