@@ -9,7 +9,7 @@ class Controller {
     } catch (error) {
       const errorResponse = {
         status: "fail",
-        data: { "error message": "No similar stocks found" },
+        data: { "error message": "API Error" },
       };
       res.status(404).send(errorResponse);
     }

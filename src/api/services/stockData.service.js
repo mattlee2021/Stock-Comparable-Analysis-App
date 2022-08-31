@@ -14,7 +14,7 @@ class StockData {
         apikey: "ZY9GZNYZQM8C1MQC",
       },
     });
-    console.log("stockData", stockData);
+
     if (stockData.data.Symbol) {
       const stockInformation = {
         Ticker: stockData.data.Symbol,
@@ -55,12 +55,14 @@ class StockData {
     });
     if (matchingNamesData.data.bestMatches.length) {
       const matchingStockNames = matchingNamesData.data.bestMatches.map(
-        (stockData) => stockData["2. name"]
+        (stockData) => [stockData["1. symbol"], stockData["2. name"]]
       );
+      // only send 5 most similar stock names
+      const result = matchingStockNames.splice(0, 5);
       const response = {
         status: "success",
         data: {
-          matchingStockNames,
+          matchingStockNames: result,
         },
       };
       return response;

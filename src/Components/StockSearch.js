@@ -21,33 +21,33 @@ const StockSearch = (props) => {
     }
   };
 
-  // const addSimilarStockToList = async () => {
-  //   const similarStockData = await FetchSimilarStocks(ticker);
-  //   if (similarStockData) {
-  //     similarStockData.forEach((stockData) => {
-  //       props.getStockData(stockData);
-  //     });
-  //   }
-  // };
+  const addSimilarStockToList = async () => {
+    const similarStockData = await stockApiService.getSimilarStocks(ticker);
+    if (similarStockData) {
+      similarStockData.forEach((stockData) => {
+        props.getStockData(stockData);
+      });
+    }
+  };
 
   const handleSubmitTicker = async (event) => {
     event.preventDefault();
     setTicker("");
     setSuggestedResults(() => []);
     addStockToList();
-    // if (showSimilarStocks) {
-    //   addSimilarStockToList();
-    // }
+    if (showSimilarStocks) {
+      addSimilarStockToList();
+    }
   };
 
   const onChangeInput = async (event) => {
     const input = event.target.value;
     setTicker(() => input);
-    // setSuggestedResults(() => []);
-    // searchResults = await FetchStockNames(input);
-    // if (searchResults) {
-    //   setSuggestedResults(() => searchResults);
-    // }
+    setSuggestedResults(() => []);
+    searchResults = await stockApiService.getMatchingStockNames(input);
+    if (searchResults) {
+      setSuggestedResults(() => searchResults);
+    }
   };
 
   return (
