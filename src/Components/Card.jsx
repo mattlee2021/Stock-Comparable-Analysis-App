@@ -128,7 +128,7 @@ const Card = (props) => {
             </tr>
             <tr>
               <td>&nbsp;</td>
-              {stockData.map((ticker, index) => {
+              {stockData.map((ticker) => {
                 return (
                   <td>
                     <DeleteButton
