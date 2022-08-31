@@ -9,8 +9,6 @@ function App() {
   const [tableData, setTableData] = useState([[]]);
   const [selectedTableIndex, setSelectedTableIndex] = useState(0);
 
-  console.log(process.env.REACT_APP_ALPHA_VANTAGE_KEY);
-
   let tableIndex;
 
   const getStockData = (newStock) => {

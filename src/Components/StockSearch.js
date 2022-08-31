@@ -9,13 +9,8 @@ const StockSearch = (props) => {
   const [ticker, setTicker] = useState("");
   let searchResults;
 
-  //API KEY is TD8ZNN64UTNOK6DA
-
   const addStockToList = async () => {
-    // api service file, apiService.getStocks(ticker) <- axios calling backend api; have both FE and BE working
-    // in api service file, have a method that calls the similar stocks API and then passes that information to the stock Data api
     const stockToAdd = await stockApiService.getStockData(ticker);
-    console.log("stockToAdd", stockToAdd);
     if (stockToAdd) {
       props.getStockData(stockToAdd);
     }

@@ -3,45 +3,59 @@
 exports[`StockSearch Should match the snapshot 1`] = `
 <form>
   <div
-    className="ticker"
+    className="flexContainer"
   >
-    <label>
-      Ticker
-    </label>
-    <input
-      className="searchBar"
-      onChange={[Function]}
-      type="text"
-      value=""
-    />
-    <button
-      className="disabled"
-      disabled={true}
-      onClick={[Function]}
-      type="submit"
-    >
-      Submit
-    </button>
     <div
-      className="similarStock"
+      className="searchContainer"
     >
-      <label>
-         Show Similar Stocks 
-      </label>
-      <input
-        checked={true}
-        onChange={[Function]}
-        type="checkbox"
+      <div
+        className="inputContainer"
+      >
+        <label
+          className="tickerLabel"
+        >
+          Ticker
+        </label>
+        <input
+          className="searchBar"
+          onChange={[Function]}
+          type="text"
+          value=""
+        />
+        <button
+          className="tickerButtonDisabled"
+          disabled={true}
+          onClick={[Function]}
+          type="submit"
+        >
+          Submit
+        </button>
+      </div>
+      <div
+        className="searchResults"
       />
     </div>
-    <button
-      type="submit"
+    <div
+      className="featureContainer"
     >
-      Create New Table
-    </button>
+      <div
+        className="similarStockFlag"
+      >
+        Show Similar Stocks
+        <input
+          checked={true}
+          onChange={[Function]}
+          type="checkbox"
+        />
+      </div>
+      <button
+        className="newTableButton"
+        onClick={[Function]}
+        type="submit"
+      >
+        Create New Table
+      </button>
+    </div>
   </div>
-  <div
-    className="searchResults"
-  />
 </form>
 `;

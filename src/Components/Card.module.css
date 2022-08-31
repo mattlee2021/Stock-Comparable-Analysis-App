@@ -3,7 +3,7 @@ table {
   position: relative;
   top: 10px;
   margin-bottom: 50px;
-  cursor: pointer;
+  cursor: grab;
 }
 
 .stockNames {
@@ -29,6 +29,7 @@ td {
 
 .isNotSelected {
   padding: 2px;
+  cursor: pointer;
 }
 
 .isSelected {
@@ -45,5 +46,5 @@ td {
 
 .draggingBorder {
   border: dashed black;
-  cursor: grab;
+
 }

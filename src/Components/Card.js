@@ -55,12 +55,7 @@ const Card = (props) => {
       return { tableNumber };
     },
     isDragging: (monitor) => {
-      console.log("tableNumber", tableNumber);
-      console.log(
-        "monitor.getItem().tableNumber",
-        monitor.getItem().tableNumber
-      );
-      return tableNumber !== monitor.getItem().tableNumber; // return true if you want to hide all cards when dragging
+      return tableNumber !== monitor.getItem().tableNumber;
     },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
@@ -77,7 +72,7 @@ const Card = (props) => {
         className={isDragging ? styles.draggingBorder : ""}
         onClick={props.onClick}
       >
-        <table ref={ref} className={isDragging ? styles.draggingCard : ""}>
+        <table ref={ref}>
           <thead>
             <tr>
               <th className={styles.metricLabelStockNames}> Metrics </th>
