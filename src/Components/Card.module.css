@@ -27,13 +27,15 @@ td {
   padding-right: 0.5em;
 }
 
+.isNotSelected {
+  padding: 2px;
+}
+
 .isSelected {
-  /* background-color: rgba(194, 201, 196, 0.712);
-  width: fit-content;
-  padding: 10px; */
-  border: 8px outset transparent;
+  border: 2px outset transparent;
   -webkit-box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
   -moz-box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
+
 }
 
 .metricLabel {
@@ -43,5 +45,5 @@ td {
 
 .draggingBorder {
   border: dashed black;
-  padding-right: 2rem;
+  cursor: grab;
 }

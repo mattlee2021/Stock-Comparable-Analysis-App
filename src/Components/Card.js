@@ -61,8 +61,6 @@ const Card = (props) => {
         monitor.getItem().tableNumber
       );
       return tableNumber !== monitor.getItem().tableNumber; // return true if you want to hide all cards when dragging
-
-      //return true;
     },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
@@ -72,7 +70,9 @@ const Card = (props) => {
   drag(drop(ref));
 
   return (
-    <div className={props.isSelected ? styles.isSelected : ""}>
+    <div
+      className={props.isSelected ? styles.isSelected : styles.isNotSelected}
+    >
       <div
         className={isDragging ? styles.draggingBorder : ""}
         onClick={props.onClick}
