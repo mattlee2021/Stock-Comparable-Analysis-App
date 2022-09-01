@@ -10,11 +10,11 @@ This project is composed of frontend and backend code. All backend code can be f
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+### To Run the Backend: `npm run backend`
+
+The backend is written with Node and Express. You should see `Listening on Port 8081` in the console.
+
 ### To Run Tests: `npm test`
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### To Run the Backend: `npm run backend`
-
-The backend is written with Node and Express. You should see `Listening on Port 8081` in the console.
