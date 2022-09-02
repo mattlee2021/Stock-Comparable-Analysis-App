@@ -2,7 +2,7 @@
 
 This project makes comparable company analysis - a method to analyze stocks - seamless. Once a user enters a stock, similar stocks will automatically be pulled into the table, making it easy to compare the financial metrics of similar companies.
 
-This project is composed of frontend and backend code. All backend code can be found in the api folder. There are also tests written with React Testing Library and Jest.
+This project is composed of frontend and backend code. The frontend is responsively designed, and all backend code can be found in the api folder. There are also tests written with React Testing Library and Jest.
 
 ## Scripts
 
