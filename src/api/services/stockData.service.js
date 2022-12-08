@@ -1,12 +1,14 @@
 import axios from "axios";
 class StockData {
   constructor() {
+    //console.log("axios", axios);
     this.instance = axios.create({
       baseURL: "https://www.alphavantage.co",
     });
   }
 
   async fetchStocks(ticker) {
+    console.log("THIS", this);
     const stockData = await this.instance.get("/query", {
       params: {
         function: "OVERVIEW",
@@ -14,6 +16,7 @@ class StockData {
         apikey: "ZY9GZNYZQM8C1MQC",
       },
     });
+    console.log("stockData", stockData);
 
     if (stockData.data.Symbol) {
       const stockInformation = {
@@ -34,6 +37,8 @@ class StockData {
           stockInformation,
         },
       };
+
+      console.log(result);
 
       return result;
     } else {
